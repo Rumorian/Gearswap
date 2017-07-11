@@ -24,7 +24,6 @@ sets.pethybridacc = set_combine(sets.petmab,{
 --	hands="Apogee Mitts +1",
 })
 
-
 --[#4 Ward Pacts ]--
 --Max out Summoning Magic Skill
 --this will be used for many types of wards, max your summoning skill for longer ward duration and more magic acc
