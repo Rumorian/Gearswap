@@ -15,7 +15,7 @@
 -- Initialization function for this job file.
 function get_sets()
 	mote_include_version = 2
-
+--	AutoRemedy = 'ON' -- Set to ON if you want to auto use remedies if silenced or Paralyzed, otherwise set to OFF --
 	-- Load and initialize the include file.
 	include('Mote-Include.lua')
 end
@@ -67,9 +67,7 @@ function init_gear_sets()
     -- 80% Fast Cast (including trait) for all spells, plus 5% quick cast
     -- RDM job trait = 30%
     sets.precast.FC = {
-		main="Marin Staff +1", -- 2%
-		sub="Clerisy Strap",  -- 2%
-		head="Carmine Mask",  -- 12%
+		head="Carmine Mask +1",  -- 14%
 		neck="Baetyl Pendant", -- 4%
 		body="Eirene's Manteel",  -- 10%
 		hands="Leyline Gloves",  -- 7%
@@ -78,7 +76,7 @@ function init_gear_sets()
 		feet="Merlinic Crackows",  -- 5%
 		lring="Prolix Ring"  -- 2%
 		}
-		-- Total: 54%
+		-- Total: 52%, Colada = 4%
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
@@ -115,39 +113,40 @@ function init_gear_sets()
 		neck="Lissome Necklace",
 		lear="Steelflash Earring",
 		rear="Bladeborn Earring",
-		body="Jhakri Robe +1",
-		hands="Jhakri Cuffs +1",
+		body="Jhakri Robe +2",
+		hands="Ayanmo Manopolas +1",
 		lring="Shukuyu Ring",
 		rring="Rufescent Ring",
-		back="Kayapa Cape",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}},
 		waist="Dynamic Belt +1",
-		legs="Jhakri Slops +1",
+		legs="Jhakri Slops +2",
 		feet="Jhakri Pigaches +1"
 	}
 	-- STR set
 
 	sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
-		ammo="Jukukik Feather",
+		ammo="Yetshila",
 		head="Jhakri Coronal +1",
-		neck="Light Gorget",
-		lear="Steelflash Earring",
-		rear="Bladeborn Earring",
-		body="Jhakri Robe +1",
-		hands="Jhakri Cuffs +1",
-		lring="Ramuh Ring",
-		rring="Petrov Ring",
-		back="Kayapa Cape",
+		neck="Fotia Gorget",
+		lear="Sherida Earring",
+		rear="Cessance Earring",
+		body="Jhakri Robe +2",
+		hands="Ayanmo Manopolas +1",
+		rring="Ramuh Ring",
+		lring="Ilabrat Ring",
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}},
 		waist="Fotia Belt",
-		feet="Jhakri Pigaches +1",
+		feet="Thereoid Greaves",
 		legs="Carmine Cuisses +1"})
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
 		})
-
+	
+	--Requiescat: Modifier MND, use elemental gorgets (fotia, shadow, soil)
 	sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {
 
 		})
-
+	--Sanguine Blade: Modifier 50% MND, 30% STR
 	sets.precast.WS['Sanguine Blade'] = {
 
 		}
@@ -162,83 +161,97 @@ function init_gear_sets()
 
 	sets.midcast.SpellInterrupt = {
 		ammo="Impatiens", --10
+		body="Psycloth Vest", --15
+		hands="Amalric Gages", --10
 		legs="Carmine Cuisses +1", --20
 		ring1="Evanescence Ring", --5
 		waist="Rumination Sash", --10
+		neck="Baetyl Pendant", --FC
+		lear="Loquacious Earring",
+		feet={ name="Merlinic Crackows", augments={'INT+8','"Fast Cast"+2','"Refresh"+2','Mag. Acc.+2 "Mag.Atk.Bns."+2',}}, --FC
+		ring2="Kishar Ring" --FC
 		}
+		--Total 70
 
 	sets.midcast.Cure = {
-		main="Marin Staff +1",
-		sub="Clerisy Strap",
 		head="Kaykaus Mitra", --10
 		body="Kaykaus Bliaut", -- 3 II
 		hands="Kaykaus Cuffs", --10
-		legs="Gyve Trousers", --10
+		legs="Atrophy Tights +1", --10, healing magic
 		feet={ name="Vanya Clogs", augments={'"Cure" potency +5%','"Cure" spellcasting time -15%','"Conserve MP"+6',}}, --10
 		neck="Incanter's Torque",
 		waist="Rumination Sash", --Spell interruption -10%
+		lear="Static Earring",
 		rear="Mendi. Earring", --5
 		lring="Stikini Ring",
 		rring="Sirona's Ring",
 		back="Solemnity Cape"} --7
 		--Total 52 + 3
 
-	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
-		})
+--	sets.midcast.CureWeather = set_combine(sets.midcast.Cure, {
+--		})
 
 	sets.midcast.CureSelf = set_combine(sets.midcast.Cure, {
 		waist="Gishdubar Sash", -- (10)
 		})
 
-	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
-		})
+	sets.midcast.Curaga = sets.midcast.Cure
 
 	sets.midcast.StatusRemoval = {
-
+		head="Carmine Mask +1",  -- 12%
+		neck="Baetyl Pendant", -- 4%
+		body="Eirene's Manteel",  -- 10%
+		hands="Leyline Gloves",  -- 7%
+		waist="Witful Belt",  -- 3%
+		legs="Psycloth Lappas",  -- 7%
+		feet="Merlinic Crackows",  -- 5%
+		lring="Prolix Ring"  -- 2%
 		}
+		-- Total FC: 50%
+
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
 		feet="Vanya Clogs",
-		waist="Gishdubar Sash"
+		waist="Gishdubar Sash",
+		lring="Ephedra Ring"
 		})
+		-- Total FC: 40%
 
 	sets.midcast['Enhancing Magic'] = {
-		main="Marin Staff +1",
-		sub="Clerisy Strap",
+		main="Grioavolr",
 		head="Telchine Cap",
 		neck="Incanter's Torque",
 		lear="Loquacious Earring",
 		rear="Static Earring",
 		body="Telchine Chasuble",
-		hands="Amalric Gages",  -- Spell Interruption
+		hands="Atrophy Gloves +2",  
 		lring="Vertigo Ring",
-		rring="Rufescent Ring",
-		back="Ghostfyre Cape",
+		rring="Stikini Ring",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		waist="Latria Sash",
 		legs="Carmine Cuisses +1",
-		feet="Lethargy houseaux +1"
+		feet="Lethargy houseaux +1",
+		sub="Enki Strap"
 	}
 	
 	sets.midcast.EnhancingDuration = {
-		main="Marin Staff +1",
-		sub="Clerisy Strap",
+		main="Grioavolr",
+		sub="Enki Strap",
 		head="Telchine Cap",
 		neck="Incanter's Torque",
 		lear="Loquacious Earring",
 		rear="Static Earring",
 		body="Telchine Chasuble",
-		hands="Amalric Gages",  -- Spell Interruption
+		hands="Atrophy Gloves +2",  
 		lring="Vertigo Ring",
 		rring="Rufescent Ring",
-		back="Ghostfyre Cape",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		waist="Latria Sash",
-		legs="Carmine Cuisses +1",
+		legs="Carmine Cuisses +1",  -- Spell Interruption
 		feet="Lethargy houseaux +1"
 	}
 
 	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
-		main="Bolelabunga",
-		sub="Culminus", --Spell Interruption
 		body="Telchine Chasuble",
 		legs={ name="Telchine Braconi", augments={'Attack+5','"Fast Cast"+3','"Regen" potency+1',}},
 		main="Bolelabunga"
@@ -247,15 +260,17 @@ function init_gear_sets()
 
 	sets.midcast.Refresh = set_combine(sets.midcast.EnhancingDuration, {
 		waist="Gishdubar Sash",
-		back="Grapevine Cape"})
+		body="Atrophy Tabard +2",
+		back="Grapevine Cape",
+		legs="Lethargy fuseau +1"})
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
 		waist="Siegel Sash",
 		neck="Nodens Gorget",
 		legs="Haven Hose"})
 
-	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
-		})
+--	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+--		})
 
 	sets.midcast.Storm = sets.midcast.EnhancingDuration
 
@@ -267,82 +282,87 @@ function init_gear_sets()
 	sets.midcast.Shellra = sets.midcast.Shell
 
  	-- Custom spell classes
-	sets.midcast.MndEnfeebles = {
-		main="Marin Staff +1",
-		sub="Clerisy Strap",
-		ammo="Kalboron Stone",
-		head="Vitivation chapeau +1",
-		neck="Incanter's Torque",
-		lear="Choleric Earring",
-		rear="Lempo Earring",
-		body="Lethargy Sayon +1",
-		hands="Lurid Mitts",
-		lring="Vertigo Ring",
-		rring="Stikini Ring",
-		back="Ghostfyre Cape",
-		waist="Rumination Sash",
-		legs="Psycloth Lappas",
-		feet="Medium's Sabots"
+	sets.midcast['Enfeebling Magic'] = {
+		main="Grioavolr", --Macc +15
+		ammo="Pemphredo Tathlum",  --Macc +8
+		head="Vitivation Chapeau +1",  --Skill +22
+		neck="Incanter's Torque", --Skill +10
+		lear="Gwati Earring",  --Macc +8
+		rear="Lempo Earring",  --Macc +5
+		body="Atrophy Tabard +2",  --Skill +19, Macc +45
+		hands="Lethargy Gantherots +1",  --Macc +24, Skill +19
+		lring="Kishar Ring",  --Macc +5, Duration +10%
+		rring="Stikini Ring",  --Macc +8, Skill +5
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}}, --Effect +10
+		waist="Rumination Sash",  --Macc +3, Skill +7
+		legs="Psycloth Lappas",  --Macc +35, Skill +18
+		feet="Medium's Sabots",  --Macc +25, Skill +15
+		sub="Enki Strap",  --Macc +10
 	}
+	--Skill 601, Macc +229
+	
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
-		ammo="Ghastly Tathlum +1"
 		})
 
-	sets.midcast.ElementalEnfeeble = sets.midcast.IntEnfeebles
+	sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
 
 
-	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {"Vitivation chapeau +1"})
-	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {"Vitivation chapeau +1"})
+	sets.midcast['Dia III'] = set_combine(sets.midcast['Enfeebling Magic'], {})
+
+	sets.midcast['Slow II'] = set_combine(sets.midcast['Enfeebling Magic'], {})
 
 	sets.midcast['Dark Magic'] = {
 		main="Rubicundity",
-		sub="Culminus",
-		ammo="Kalboron Stone",
-		head="Carmine Mask",
-		neck="Incanter's Torque",
-		lear="Lempo Earring",
+		ammo="Hydrocera",
+		head="Carmine Mask +1",
+		neck="Erra Pendant",
+		lear="Choleric Earring",
 		rear="Lempo Earring",
 		body="Psycloth Vest",
-		hands="Jhakri Cuffs",
+		hands="Leyline Gloves",
 		lring="Evanescence Ring",
 		rring="Stikini Ring",
-		back="Ghostfyre Cape",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		waist="Tengu-No-Obi",
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
-		feet="Jhakri Pigaches +1"
+		feet="Jhakri Pigaches +1",
+		sub="Culminus"
 	}
 
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+2','"Fast Cast"+5','MND+2','"Mag.Atk.Bns."+10',}},
+		head="Pixie Hairpin +1",
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},
 		waist="Fucho-No-Obi"})
 	
 	sets.midcast.Aspir = sets.midcast.Drain
 
-	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
+	sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {
+		})
 
 	sets.midcast['Elemental Magic'] = {
-		main="Marin Staff +1",
-		sub="Clerisy Strap",
-		ammo="Ghastly Tathlum +1",
+		main="Grioavolr",
+		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood",
 		neck="Mizukage-no-Kubikazari",
-	    lear="Friomisi Earring",
+		lear="Friomisi Earring",
 		rear="Choleric Earring",
-		body="Jhakri Robe +1",
+		body="Jhakri Robe +2",
 		hands="Amalric Gages",
-        lring="Stikini Ring",
+		lring="Stikini Ring",
 		rring="Resonance Ring",
-		waist="Refoccilation Stone",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
-		back="Ghostfyre Cape"}
+		legs="Jhakri Slops +2",
+		waist="Tengu-No-Obi",
+		sub="Enki Strap"}
 
 	sets.midcast['Elemental Magic'].Seidr = set_combine(sets.midcast['Elemental Magic'], {
 		body="Seidr Cotehardie"
 		})
 
-	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
+	sets.midcast['Enfeebling Magic'].Resistant = set_combine(sets.midcast['Enfeebling Magic'], {
+		body="Jhakri Robe +2"
 
 		})
 		
@@ -356,25 +376,40 @@ function init_gear_sets()
 		
 	-- Job-specific buff sets
 	sets.buff.ComposureOther = {
+		head="Lethargy Chappel +1",
+		neck="Incanter's Torque",
+		lear="Loquacious Earring",
+		rear="Static Earring",
+		body="Lethargy Sayon +1",
+		hands="Atrophy Gloves +2",
+		lring="Vertigo Ring",
+		rring="Rufescent Ring",
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+		waist="Latria Sash",
+		legs="Lethargy Fuseau +1",
+		feet="Lethargy Houseaux +1"
 		}
-
-	sets.buff.Saboteur = {}
+		
+	sets.buff.Saboteur = {hands="Lethargy Gantherots +1"}
 	
 	
 	sets.magic_burst = {
-		ammo="Ghastly Tathlum +1",
+		main="Grioavolr",
+		ammo="Pemphredo Tathlum",
 		head="Merlinic Hood", --10
 		ear1="Barkarole Earring",
 		ear2="Choleric Earring",
-		body="Jhakri Robe +1",
+		body="Ea Houppelande", --8, 8 II
 		hands="Amalric Gages", --5 II
         ring1="Mujin Band", --5 II
-		ring2="Locus Ring", --5
-		waist="Refoccilation Stone",
+		ring2="Resonance Ring", 
+		waist="Tengu-No-Obi",
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},  --9
-		neck="Mizukage-no-Kubikazari"}
-	-- 44 +10
+		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+		neck="Mizukage-no-Kubikazari",
+		sub="Enki Strap"} --10
+	-- 47 +18
 
 	
 	------------------------------------------------------------------------------------------------
@@ -386,28 +421,30 @@ function init_gear_sets()
 		sub="Genmei Shield",
 		ammo="Homiliary",
 		head="Vitivation chapeau +1",
-		neck="Bathy Choker +1",
-		lear="Infused Earring",
+		neck="Twilight Torque",
+		lear="Eabani Earring",
 		rear="Hearty Earring",
-		body="Witching Robe",
-		hands="Merlinic Dastanas",
-		lring="Paguroidea Ring",
+		body="Witching Robe", -- 1 less refresh but higher meva/mdb than Jhakri Robe +2
+		hands={ name="Merlinic Dastanas", augments={'DEX+4','AGI+8','"Refresh"+2',}},
+		lring="Shukuyu Ring",
 		rring="Defending Ring",
-		waist="Fucho-No-Obi",
+		waist="Slipor Sash",
+		back="Solemnity Cape",
+		feet={ name="Merlinic Crackows", augments={'INT+8','"Fast Cast"+2','"Refresh"+2','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
 		legs="Carmine Cuisses +1"
 	}
 	
 	sets.idle.DT = set_combine(sets.idle, {
+		ammo="Staunch Tathlum"
 		})
 
 	sets.idle.Town = set_combine(sets.idle, {
-
 		})
 
 	sets.idle.Weak = sets.idle.DT
 
 	sets.resting = set_combine(sets.idle, {
-
+		waist="Austerity Belt"
 		})
 	
 	------------------------------------------------------------------------------------------------
@@ -426,22 +463,26 @@ function init_gear_sets()
 	
 	sets.engaged = {
 		ammo="Ginsen",
-		head="Carmine Mask", -- Haste 8%
+		head="Carmine Mask +1", -- Haste 8%
 		neck="Lissome Necklace",
-		lear="Steelflash Earring",
-		rear="Mache Earring",
-		body="Jhakri Robe +1", -- Haste 1%
-		hands="Leyline Gloves", -- Haste 5%
-		lring="Portus Annulet",
+		lear="Sherida Earring",
+		rear="Cessance Earring",
+		body="Jhakri Robe +2", -- Haste 1%
+		hands="Ayanmo Manopolas +1", -- Haste 4%
+		lring="Ilabrat Ring",
 		rring="Petrov Ring",
-		back="Kayapa Cape",
-		waist="Dynamic Belt +1",  -- Haste 6%
+		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}},
+		waist="Windbuffet Belt +1",  
 		legs="Carmine Cuisses +1",  -- Haste 6%
-		feet="Jhakri Pigaches +1"
+		feet={ name="Merlinic Crackows", augments={'Attack+21','Pet: VIT+14','Quadruple Attack +3','Accuracy+19 Attack+19','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
+		--feet="Jhakri Pigaches +1"
 	}
-	-- Haste 26%
+	-- Haste 25%
 
-	sets.buff.Doom = {ring1="Saida Ring", ring2="Saida Ring", waist="Gishdubar Sash"}
+	sets.buff.Doom = {
+		ring1="Ephedra Ring", 
+--		ring2="Saida Ring", 
+		waist="Gishdubar Sash"}
 
 	sets.Obi = {waist="Hachirin-no-Obi"}
 	sets.CP = {back="Mecisto. Mantle"}
@@ -451,6 +492,27 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+function pretarget(spell,action)
+        if spell.action_type == 'Magic' or spell.type == 'JobAbility' and buffactive.silence or buffactive.paralysis then -- Auto Use Echo Drops If You Are Silenced --
+                cancel_spell()
+                send_command('input /item "Remedy" <me>')
+        elseif spell.type == "WeaponSkill" and spell.target.distance > target_distance and player.status == 'Engaged' then -- Cancel WS If You Are Out Of Range --
+                cancel_spell()
+                add_to_chat(123, spell.name..' Canceled: [Out of Range]')
+                return
+        end
+end
+
+--function pretarget(spell,action) 
+-- if buffactive['Silence'] or buffactive['Paralysis'] then
+--            if spell.action_type == 'Magic' or spell.type == 'JobAbility' then  
+ --               cancel_spell()
+ --               send_command('input /item "Remedy" <me>')
+ --           end            
+--        end
+ --   end
+	
 
 function job_precast(spell, action, spellMap, eventArgs)
 
@@ -520,6 +582,8 @@ end
 -- Job-specific hooks for non-casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+
+
 function job_aftercast(spell)
     if spell.english == 'Sleep' or spell.english == 'Sleepga' then
 		send_command('@timers c "'..spell.english..' ['..spell.target.name..']" 60 down spells/00220.png')
@@ -557,6 +621,8 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+
+
 
 -- Called for direct player commands.
 function job_self_command(cmdParams, eventArgs)
@@ -671,7 +737,7 @@ end
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     if player.sub_job == 'SCH' then
-        set_macro_page(4, 2)
+        set_macro_page(4, 3)
     elseif player.sub_job == 'BLM' then
         set_macro_page(6, 3)	
     elseif player.sub_job == 'WHM' then
