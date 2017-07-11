@@ -5,10 +5,10 @@
 -- Initialization function for this job file.
 function get_sets()
 	mote_include_version = 2
-	
+	AutoRemedy = 'ON' -- Set to ON if you want to auto use remedies if silenced or Paralyzed, otherwise set to OFF --
 	-- Load and initialize the include file.
 	include('Mote-Include.lua')
-	send_command('wait 2;input /lockstyleset 05')
+	send_command('wait 2;input /lockstyleset 04')
 end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
@@ -24,8 +24,9 @@ end
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
 	state.OffenseMode:options('None', 'Normal')
-	state.CastingMode:options('Normal', 'Seidr', 'Resistant')
-	state.IdleMode:options('Normal', 'PDT', 'MDT')
+	state.CastingMode:options('Normal', 'Seidr', 'Resistant', 'MagicBurst')
+	state.IdleMode:options('Normal', 'PDT', 'MDT', 'Refresh')
+
 
 	state.MagicBurst = M(false, 'Magic Burst')
 	state.MPCoat = M(false, 'MP Coat')
@@ -71,11 +72,9 @@ function init_gear_sets()
 	sets.precast.JA['Radial Arcana'] = {feet="Bagua Sandals +1"}
   
 	-- Fast cast sets for spells
-	
 	sets.precast.FC = {
 	--	/RDM --15
   		main="Solstice", --5
-		sub="Culminus",
 		neck="Baetyl Pendant", --4
 		head="Vanya Hood", --10
 		waist="Witful Belt", --3
@@ -86,8 +85,9 @@ function init_gear_sets()
 		legs="Geomancy Pants +1",  --11
 		ring1="Prolix ring",  --2
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+2','"Fast Cast"+5','MND+2','"Mag.Atk.Bns."+10',}}, --10
-		ring2="Rahab Ring"   --2
-		} -- 70 without /RDM
+		ring2="Kishar Ring",  --5
+		sub="Culminus"
+		} -- 73 without /RDM
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		waist="Siegel Sash"})
@@ -113,58 +113,75 @@ function init_gear_sets()
 	 
 	-- Weaponskill sets
 	-- Default set for any weaponskill that isn't any more specifically defined
-   sets.precast.WS = {head="Sukeroku Hachi.",feet="Battlecast Gaiters"}
+	sets.precast.WS = {
+		head="Jhakri Coronal +1",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +1",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +1"}
 
   -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
   -- Realmrazer = MND
-  sets.precast.WS['Realmrazer'] = {
-     head="Jhakri Coronal +1",
-	 neck="Flame Gorget",
-	 ear1="Friomisi Earring",
-	 ear2="Brutal Earring",
-     body="Jhakri Robe +1",
-	 hands="Helios Gloves",
-	 ring1="Rufescent Ring",
-     waist="Fotia Belt",
-	 legs="Vanya Slops",
-	 feet="Jharki Pigaches +1"}
+	sets.precast.WS['Realmrazer'] = {
+		head="Jhakri Coronal +1",
+		neck="Fotia Gorget",
+		ear1="Friomisi Earring",
+		ear2="Mache Earring",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +1",
+		ring1="Rufescent Ring",
+		waist="Fotia Belt",
+		legs="Vanya Slops",
+		feet="Jhakri Pigaches +1"}
 
 	-- Exudation 50% MND 50% INT
-sets.precast.WS['Exudation'] = {
-     head="Jhakri Coronal +1",
-	 neck="Sanctity Necklace",
-	 ear1="Friomisi Earring",
-	 ear2="Brutal Earring",
-     body="Jhakri Robe +1",
-	 hands="Jhakri Cuffs +1",
-	 ring1="Rufescent Ring",
-     waist="Latria Sash",
-	 legs="Vanya Slops",
-	 feet="Jhakri Pigaches +1"}
+	sets.precast.WS['Exudation'] = {
+		head="Jhakri Coronal +1",
+		neck="Sanctity Necklace",
+		ear1="Cessance Earring",
+		ear2="Mache Earring",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +1",
+		ring1="Rufescent Ring",
+		waist="Latria Sash",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +1"}
 	 
 	-- Flash Nova 50% STR 50% MND 
  sets.precast.WS['Flash Nova'] = {
-     head="Jhakri Coronal +1",
-	 neck="Mizukage-No-Kubikazari",
-	 ear1="Friomisi Earring",
-	 ear2="Brutal Earring",
-     body="Jhakri Robe +1",
-	 hands="Jhakri Cuffs +1",
-	 ring1="Rufescent Ring",
-	 ring2="Ifrit Ring",
-     waist="Latria Sash",
-	 legs="Jhakri Slops +1",
-	 feet="Jharki Pigaches +1"}
+		head="Jhakri Coronal +1",
+		neck="Mizukage-No-Kubikazari",
+		ear1="Friomisi Earring",
+		ear2="Mache Earring",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +1",
+		ring1="Rufescent Ring",
+		ring2="Ifrit Ring",
+		waist="Latria Sash",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +1"}
 
+	 -- 30% STR 30% INT
+	sets.precast.WS['Cataclysm'] = {
+		head="Jhakri Coronal +1",
+		neck="Mizukage-No-Kubikazari",
+		ear1="Barkarole Earring",
+		ear2="Mache Earring",
+		body="Jhakri Robe +2",
+		hands="Jhakri Cuffs +1",
+		ring1="Rufescent Ring",
+		ring2="Ifrit Ring",
+		waist="Latria Sash",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +1"}
 	
 	------------------------------------------------------------------------
 	----------------------------- Midcast Sets -----------------------------
 	------------------------------------------------------------------------
 	
-	-- Base fast recast for spells  --70
+	-- Base fast recast for spells  --73
 	sets.midcast.FastRecast = {
   		main="Solstice", --5
-		sub="Culminus",
 		neck="Baetyl Pendant", --4
 		head="Vanya Hood", --10
 		waist="Witful Belt", --3
@@ -175,12 +192,12 @@ sets.precast.WS['Exudation'] = {
 		legs="Geomancy Pants +1",  --11
 		ring1="Prolix ring",  --2
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+2','"Fast Cast"+5','MND+2','"Mag.Atk.Bns."+10',}}, --10
-		ring2="Rahab Ring"  --2
+		ring2="Kishar Ring",  --5
+		sub="Culminus"
 		} 
 	
    sets.midcast.Geomancy = {
-		main="Rubicundity",
-		sub="Culminus",
+		main="Idris",
 		head="Azimuth Hood +1",
 		neck="Incanter's Torque",
 		body="Azimuth Coat +1",
@@ -192,12 +209,12 @@ sets.precast.WS['Exudation'] = {
 		legs="Bagua Pants +1",
 		rring="Stikini Ring",
 		legs="Azimuth Tights +1",
-		feet="Azimuth Gaiters +1"
+		feet="Azimuth Gaiters +1",
+		sub="Culminus"
 		}
 	
 	sets.midcast.Geomancy.Indi = {
-		main="Solstice",
-		sub="Culminus",
+		main="Idris",
 		head="Azimuth Hood +1",
 		body="Azimuth Coat +1",
 		neck="Incanter's Torque",
@@ -207,12 +224,12 @@ sets.precast.WS['Exudation'] = {
 		back="Nantosuelta's Cape",
 		legs="Bagua Pants +1",
 		rring="Stikini Ring",
-		feet="Azimuth Gaiters +1"
+		feet="Azimuth Gaiters +1",
+		sub="Culminus"
 		}
 
 	sets.midcast.Cure = {
 		main="Divinity",  --15
-		sub="Culminus",
 		head="Vanya Hood", --10
 		neck="Incanter's Torque", 
 		ear1="Mendicant's Earring",
@@ -223,34 +240,52 @@ sets.precast.WS['Exudation'] = {
         back="Solemnity Cape", --7
 		waist="Gishdubar Sash", --10 self
 		legs="Vanya Slops",
-		feet="Vanya Clogs" --10
+		feet="Vanya Clogs", --10
+		sub="Sors Shield" --3
 		}
+		
+		--55 Potency, 10 self
 
 	sets.midcast.Curaga = set_combine(sets.midcast.Cure, {
 
 		})
 
-	sets.midcast.Cursna = set_combine(sets.midcast.Cure, {
-		waist="Gishdubar Sash",
-		feet="Vanya Clogs"
-		})
+	sets.midcast.Cursna = {
+		waist="Gishdubar Sash", --Cursna potency +10%
+		feet="Vanya Clogs", --Cursna +5
+		lring="Ephedra Ring", --Cursna potency +10%
+  		main="Solstice", --5
+		sub="Culminus",
+		neck="Baetyl Pendant", --4
+		head="Vanya Hood", --10
+		lear="Loquacious Earring",  -- 2
+		body="Eirene's Manteel",  --10
+		hands="Telchine Gloves",  --4
+		back="Lifestream Cape",  --7
+		legs="Geomancy Pants +1",  --11
+		ring2="Kishar Ring"  --5
+		}
+		--58% FC
 
+		--GEO has no enhancing magic skill
 	sets.midcast['Enhancing Magic'] = {
 		head="Telchine Cap",  --Duration +5
 		neck="Incanter's Torque",
-		body="Telchine Chasuble",
+		body={ name="Telchine Chas.", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +8',}}, --Duration +8, skill +12
 		waist="Latria Sash",
 		feet="Telchine Pigaches", --Duration +7
 		ring1="Vertigo Ring",
 		ring2="Stikini Ring",
-		back="Fi Follet Cape"
+		back="Fi Follet Cape", --Skill +8
+		legs="Vanya Slops",
+		lear="Static Earring"
 		}
 		
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-	body="Telchine Chasuble",
 	legs={ name="Telchine Braconi", augments={'Attack+5','"Fast Cast"+3','"Regen" potency+1',}},
-	main="Bolelabunga"
+	main="Bolelabunga" --Regen potency +10%
 		})
+		--Telchine Chasuble = Regen duration +12, enhancing duration +8
 	
 	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
 		waist="Gishdubar Sash",
@@ -258,82 +293,62 @@ sets.precast.WS['Exudation'] = {
 		})
 			
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-		waist="Siegel Sash",legs="Haven Hose",neck="Nodens Gorget"})
+		waist="Siegel Sash", --Stoneskin +20
+		legs="Haven Hose", --Stoneskin +20
+		neck="Nodens Gorget" --Stoneskin +30
+		}) 
 
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
 		})
 
-	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {
-		})
+	sets.midcast.Protectra = {
+		}
 
 	sets.midcast.Shellra = sets.midcast.Protectra
 
 	sets.midcast.MndEnfeebles = {
-		main="Divinity",
-		sub="Culminus",
+		main="Grioavolr",
 		head="Befouled Crown",
 		neck="Incanter's Torque",
-        body="Vanya Robe",
+		body="Vanya Robe",
 		lear="Barkarole Earring",
-		rear="Static Earring",
+		rear="Gwati Earring",
 		hands="Azimuth Gloves +1",
 		ring1="Stikini Ring",
-		ring2="Vertigo Ring",
-        waist="Rumination Sash",
+		ring2="Kishar Ring",
+		waist="Rumination Sash",
 		back="Lifestream Cape",
 		legs="Psycloth Lappas",
-		feet="Bagua Sandals +1"
+		feet="Bagua Sandals +1",
+		sub="Enki Strap"
 		} -- MND/Magic accuracy
 	
-	sets.midcast.IntEnfeebles = {
-		main="Rubicundity",
-		sub="Culminus",
-		head="Befouled Crown",
-		neck="Incanter's Torque",
-		lear="Barkarole Earring",
-        body="Vanya Robe",
-		hands="Azimuth Gloves +1",
-		ring1="Stikini Ring",
-		ring2="Vertigo Ring",
-        waist="Rumination Sash",
+	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
-		feet="Bagua Sandals +1"
-		} -- INT/Magic accuracy
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}
+		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
 		main="Rubicundity",
-		sub="Culminus",
 		head="Merlinic Hood",
 		body="Psycloth Vest",
 		hands="Jhakri Cuffs +1",
-		neck="Incanter's Torque",
+		neck="Erra Pendant",
 		ammo="Azimuth Gloves +1",
-        legs="Azimuth Tights +1",
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},
 		legs="Azimuth Tights +1",
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},
+		lear="Barkarole Earring",
+		rear="Gwati Earring",
 		ring1="Stikini Ring",
 		ring2="Evanescence Ring",
 		waist="Tengu-no-Obi",
-		neck="Incanter's Torque"
+		sub="Culminus"
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-		main="Rubicundity",
-		sub="Culminus",
-		head="Bagua Galero +1",
-		body="Psycloth Vest",
-		hands="Helios Gloves",
-		neck="Incanter's Torque",
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+		head="Pixie Hairpin +1",
 		waist="Fucho-No-Obi",
-		legs="Azimuth Tights +1",
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},
-		lear="Mendicant's Earring",
-		ring1="Evanescence Ring",
-		ring2="Stikini Ring",
-		neck="Incanter's Torque"
 		})
 	
 	sets.midcast.Aspir = sets.midcast.Drain
@@ -344,23 +359,23 @@ sets.precast.WS['Exudation'] = {
 	-- Elemental Magic sets
 	
 	sets.midcast['Elemental Magic'] = {
-		main="Solstice",
-		sub="Culminus",
+		main="Grioavolr",
 		head="Merlinic Hood",
 		neck="Mizukage-no-Kubikazari",
 	    ear1="Barkarole Earring",
 		ear2="Choleric Earring",
-		body="Seidr Cotehardie",
+		body="Count's Garb",
 		ring1="Stikini Ring",
 		ring2="Resonance Ring",
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
-		waist="Refoccilation Stone",
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},
+		waist="Tengu-No-Obi",
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
-		hands="Amalric Gages"}
+		hands="Amalric Gages",
+		sub="Enki Strap"}
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-
+		body="Jhakri Robe +2"
 		})
 
 	sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
@@ -379,6 +394,23 @@ sets.precast.WS['Exudation'] = {
 		head=empty,
 
 		})
+		
+	sets.midcast['Elemental Magic'].MagicBurst = {
+		main="Grioavolr",
+		head="Merlinic Hood", --10
+		neck="Mizukage-no-Kubikazari", --10
+	    ear1="Barkarole Earring",
+		ear2="Choleric Earring",
+		hands="Amalric Gages", --5 II
+        ring1="Mujin Band", --5 II
+		ring2="Resonance Ring", 
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
+		waist="Refoccilation Stone",
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}}, --9
+		body="Ea Houppelande",
+		sub="Enki Strap"}   --8, 8 II
+		--47 + 18 total
 
 	------------------------------------------------------------------------------------------------
 	------------------------------------------ Idle Sets -------------------------------------------
@@ -386,20 +418,24 @@ sets.precast.WS['Exudation'] = {
 
 	sets.idle = {
 		main="Bolelabunga",
-		sub="Genmei Shield",
 		head="Befouled Crown",
 		body="Witching Robe",
-		hands="Merlinic Dastanas",
+		hands={ name="Merlinic Dastanas", augments={'DEX+4','AGI+8','"Refresh"+2',}},
 		neck="Twilight Torque",
 		lear="Hearty Earring",
-		rear="Infused Earring",
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Pet: "Regen"+10',}},
-		waist="Fucho-No-Obi",
-		ring1="Paguroidea Ring",
+		rear="Eabani Earring",
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10',}},
+		waist="Slipor Sash",
+		ring1="Vengeful Ring",
 		ring2="Defending Ring",
 		legs="Assiduity Pants +1",
-		feet="Geomancy Sandals +1"
+		feet="Geomancy Sandals +2",
+		sub="Genmei Shield"
 		}
+		
+	sets.idle.Refresh = set_combine(sets.idle, {
+		feet={ name="Merlinic Crackows", augments={'INT+8','"Fast Cast"+2','"Refresh"+2','Mag. Acc.+2 "Mag.Atk.Bns."+2',}}
+	})
 	
 	sets.resting = set_combine(sets.idle, {
 
@@ -415,39 +451,41 @@ sets.precast.WS['Exudation'] = {
 
 	sets.idle.Weak = sets.idle.PDT
 
-	-- .Pet sets are for when Luopan is present.
+	-- .Pet sets are for when Luopan is present. Max -dt is 87.5%. 
 	sets.idle.Pet = { 
 		-- dt/regen --
-		main="Solstice", --pet dt 4
-		sub="Genmei Shield",
+		main="Idris", --pet dt 25
 		head="Azimuth Hood +1",  -- pet regen 3
 		neck="Twilight Torque",
 		lear="Hearty Earring",
 		rear="Eabani Earring",
-		body="Helios Jacket", -- pet regen 2
-		lring="Thurandaut Ring", -- pet dt 3
+		body={ name="Telchine Chas.", augments={'Pet: Mag. Evasion+15','Pet: "Regen"+3','Pet: Damage taken -3%',}}, -- pet dt 3, regen 3
+		hands={ name="Merlinic Dastanas", augments={'DEX+4','AGI+8','"Refresh"+2',}},
+		lring="Vengeful Ring", 
 		rring="Defending Ring",
-		waist="Isa Belt", -- pet dt 3
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Pet: "Regen"+10',}}, -- pet regen 10
-		legs={ name="Telchine Braconi", augments={'Accuracy+15 Attack+15','Pet: "Regen"+3','Pet: Damage taken -4%',}}, -- pet dt 4, regen 3
+		waist="Slipor Sash", 
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10',}}, -- pet regen 10
+		legs={ name="Telchine Braconi", augments={'Pet: Mag. Evasion+19','Pet: "Regen"+3','Pet: Damage taken -4%',}}, -- pet dt 4, regen 3
 		feet="Bagua Sandals +1",  -- pet regen 3
-		hands="Geomancy Mitaines +1" -- pet dt 11
+		sub="Genmei Shield"
 		}
 		--Dunna: pet dt 5
+		--Pet innate dt -50, 37.5% needed to cap
+		-- Total: dt -37, regen 22
+
 		
-		-- Total: dt -30, regen 21
-
-
 
 	sets.idle.Town = set_combine(sets.idle, {
-	body="Councilor's Garb",
-	feet="Geomancy Sandals"
+		main="Idris",
+		body="Councilor's Garb",
+		feet="Geomancy Sandals +2",
+		sub="Culminus"
 		})
 		
 	-- Defense sets
 
 	sets.defense.PDT = {
-		main="Solstice",
+		main="Idris",
 		sub="Genmei Shield",
 		head="Befouled Crown",
 		body="Witching Robe",
@@ -458,25 +496,27 @@ sets.precast.WS['Exudation'] = {
 		ring1="Paguroidea Ring",
 		ring2="Defending Ring",
 		legs="Assiduity Pants +1",
-		feet="Geomancy Sandals +1"
+		feet="Geomancy Sandals +2"
 		}
 
 	sets.defense.MDT = {
+		main="Idris",
 		head="Befouled Crown",
 		body="Witching Robe",
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+5','Pet: "Regen"+10',}},
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10',}},
 		hands="Bagua Mitaines +1",
 		neck="Twilight Torque",
 		rear="Infused Earring",
 		waist="Fucho-No-Obi",
-		ring1="Paguroidea Ring",
+		ring1="Shukuyu Ring",
 		ring2="Defending Ring",
 		legs="Assiduity Pants +1",
-		feet="Geomancy Sandals +1"
+		feet="Geomancy Sandals +2",
+		sub="Genmei Shield"
 		}
 
 	sets.Kiting = {
-		feet="Geomancy Sandals +1"
+		feet="Geomancy Sandals +2"
 		}
 
 
@@ -492,43 +532,43 @@ sets.precast.WS['Exudation'] = {
 	
 	-- Normal melee group  --Haste
 	sets.engaged = {		
-		main="Divinity",
-		sub="Genmei Shield",
+		main="Idris",
 		head="Jhakri Coronal +1", --3
-        neck="Sanctity Necklace",
+		neck="Sanctity Necklace",
 		ear1="Cessance Earring",
 		ear2="Mache Earring",
-        body="Jhakri Robe +1",  --1
-		hands="Merlinic Dastanas",  --3
+		body="Jhakri Robe +2",  --1
+		hands="Jhakri Cuffs +1",  --0
 		ring1="Portus Annulet",
-		ring2="Rajas Ring",
-        waist="Windbuffet Belt +1",  
+		ring2="Petrov Ring",
+		waist="Windbuffet Belt +1",  
 		back={ name="Nantosuelta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Haste+10',}},  --10
-		legs="Jhakri Slops +1",  --2
-		feet="Jhakri Pigaches +1"  --19 total
+		feet={ name="Merlinic Crackows", augments={'Attack+21','Pet: VIT+14','Quadruple Attack +3','Accuracy+19 Attack+19','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},  --3
+		legs="Jhakri Slops +2",  --2
+		sub="Genmei Shield"
 		}
-
+		--19 Total
 
 	--------------------------------------
 	-- Custom buff sets
 	--------------------------------------
 
 	sets.magic_burst = {
-		main="Solstice",
-		sub="Culminus",
+		main="Grioavolr",
 		head="Merlinic Hood", --10
 		neck="Mizukage-no-Kubikazari", --10
 	    ear1="Barkarole Earring",
 		ear2="Choleric Earring",
 		hands="Amalric Gages", --5 II
         ring1="Mujin Band", --5 II
-		ring2="Locus Ring", --5
+		ring2="Resonance Ring", 
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
 		waist="Refoccilation Stone",
 		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}}, --9
-		body="Jhakri Robe +1"}  
-		--44 + 10 total
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}}, --9
+		body="Ea Houppelande",
+		sub="Enki Strap"}   --8, 8 II
+		--47 + 18 total
 		
 end
 
@@ -537,6 +577,18 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+    -- Auto Remedy --
+
+function pretarget(spell,action) 
+ if buffactive['Silence'] or buffactive['Paralysis'] then
+            if spell.action_type == 'Magic' or spell.type == 'JobAbility' then  
+                cancel_spell()
+                send_command('input /item "Remedy" <me>')
+            end            
+        end
+    end
+	
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 	if spell.skill == 'Elemental Magic' and state.MagicBurst.value then
@@ -645,21 +697,14 @@ function job_self_command(cmdParams, eventArgs)
 	end
 end
 
----- .::Pretarget Functions::. ---->
+function buff_change(name,gain)
 
-function pretarget(spell,action)
-    -- Auto-Echo drop :D --
-    if spell.action_type == 'Magic' and buffactive['Silence'] then
-        cancel_spell()
-        send_command('input /item "Echo Drops" <me>')
-    -- Auto Blaze of Glory for lazies :p -- 
-    elseif string.find(spell.english, 'Geo-') then
-        if not (buffactive['Bolster'] or  buffactive['Amnesia'] or  buffactive['Blaze of Glory'] or pet.isvalid) then
-            cancel_spell()
-            send_command('input /ja "Blaze of Glory" <me>;wait 2;input /ma "'..spell.english..'" '..spell.target.name)
-        end
-    end
+	if name == "silence" and gain =="True" then
+		send_command('@input /item "Remedy" <me>')
+	end
+
 end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
@@ -667,7 +712,19 @@ end
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
-	set_macro_page(1, 9)
+    if player.sub_job == 'SCH' then
+        set_macro_page(1, 9)
+    elseif player.sub_job == 'BLM' then
+        set_macro_page(1, 9)	
+    elseif player.sub_job == 'WHM' then
+        set_macro_page(1, 9)
+    elseif player.sub_job == 'RDM' then
+        set_macro_page(1, 9)
+    elseif player.sub_job == 'NIN' then
+        set_macro_page(2, 9)
+    elseif player.sub_job == 'WAR' then
+        set_macro_page(2, 9)
+	end	
 end
 
 
@@ -685,7 +742,9 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 	'Firaga', 'Blizzaga', 'Aeroga', 'Stonega', 'Thundaga', 'Waterga',
 	'Firaga II', 'Blizzaga II', 'Aeroga II', 'Stonega II', 'Thundaga II', 'Waterga II',
 	'Firaga III', 'Blizzaga III', 'Aeroga III', 'Stonega III', 'Thundaga III', 'Waterga III',	
-	'Firaja', 'Blizzaja', 'Aeroja', 'Stoneja', 'Thundaja', 'Waterja',
+	'Firaja', 'Blizzaja', 'Aeroja', 'Stoneja', 'Thundaja', 'Waterja', 'Stonera', 'Stonera II', 'Stonera III',
+	'Thundara', 'Thundara II', 'Thundara III', 'Watera', 'Watera II', 'Watera III', 'Fira', 'Fira II', 'Fira III',
+	'Blizzara', 'Blizzara II', 'Blizzara III', 'Aera', 'Aera II', 'Aera III'
 	}
 	cures = S{'Cure IV','Cure III','Cure II',}
 	
@@ -785,12 +844,18 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 					newSpell = 'Fire II'					
 				elseif spell.english == 'Fire II' then
 					newSpell = 'Fire'
-				elseif spell.english == 'Firaja' then
+				elseif spell.english == 'Firaga' then
 					newSpell = 'Firaga III'
 				elseif spell.english == 'Firaga III' then
 					newSpell = 'Firaga II'					
 				elseif spell.english == 'Firaga II' then
 					newSpell = 'Firaga'
+				elseif spell.english == 'Fira' then
+					newSpell = 'Fira III'
+				elseif spell.english == 'Fira III' then
+					newSpell = 'Fira II'					
+				elseif spell.english == 'Fira II' then
+					newSpell = 'Fira'					
 				end 
 				if spell.english == 'Blizzard' then
 					eventArgs.cancel = true
@@ -805,12 +870,18 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 					newSpell = 'Blizzard II'						
 				elseif spell.english == 'Blizzard II' then
 					newSpell = 'Blizzard'
-				elseif spell.english == 'Blizzaja' then
+				elseif spell.english == 'Blizzaga' then
 					newSpell = 'Blizzaga III'
 				elseif spell.english == 'Blizzaga III' then
 					newSpell = 'Blizzaga II'
 				elseif spell.english == 'Blizzaga II' then
 					newSpell = 'Blizzaga'	
+				elseif spell.english == 'Blizzara' then
+					newSpell = 'Blizzara III'
+				elseif spell.english == 'Blizzara III' then
+					newSpell = 'Blizzara II'
+				elseif spell.english == 'Blizzara II' then
+					newSpell = 'Blizzara'						
 				end 
 				if spell.english == 'Aero' then
 					eventArgs.cancel = true
@@ -825,12 +896,18 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 					newSpell = 'Aero II'						
 				elseif spell.english == 'Aero II' then
 					newSpell = 'Aero'
-				elseif spell.english == 'Aeroja' then
+				elseif spell.english == 'Aeroga' then
 					newSpell = 'Aeroga III'
 				elseif spell.english == 'Aeroga III' then
 					newSpell = 'Aeroga II'	
 				elseif spell.english == 'Aeroga II' then
 					newSpell = 'Aeroga'	
+				elseif spell.english == 'Aera' then
+					newSpell = 'Aera III'
+				elseif spell.english == 'Aera III' then
+					newSpell = 'Aera II'	
+				elseif spell.english == 'Aera II' then
+					newSpell = 'Aera'	
 				end 
 				if spell.english == 'Stone' then
 					eventArgs.cancel = true
@@ -845,12 +922,18 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 					newSpell = 'Stone II'						
 				elseif spell.english == 'Stone II' then
 					newSpell = 'Stone'
-				elseif spell.english == 'Stoneja' then
+				elseif spell.english == 'Stonega' then
 					newSpell = 'Stonega III'
 				elseif spell.english == 'Stonega III' then
 					newSpell = 'Stonega II'
 				elseif spell.english == 'Stonega II' then
 					newSpell = 'Stonega'	
+				elseif spell.english == 'Stonera' then
+					newSpell = 'Stonera III'
+				elseif spell.english == 'Stonera III' then
+					newSpell = 'Stonera II'
+				elseif spell.english == 'Stonera II' then
+					newSpell = 'Stonera'	
 				end 
 				if spell.english == 'Thunder' then
 					eventArgs.cancel = true
@@ -871,6 +954,12 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 					newSpell = 'Thundaga II'
 				elseif spell.english == 'Thundaga II' then
 					newSpell = 'Thundaga'	
+				elseif spell.english == 'Thundara' then
+					newSpell = 'Thundara III'
+				elseif spell.english == 'Thundara III' then
+					newSpell = 'Thundara II'
+				elseif spell.english == 'Thundara II' then
+					newSpell = 'Thundara'			
 				end 
 				if spell.english == 'Water' then
 					eventArgs.cancel = true
@@ -890,6 +979,12 @@ function refine_various_spells(spell, action, spellMap, eventArgs)
 				elseif spell.english == 'Waterga III' then
 					newSpell = 'Waterga II'	
 				elseif spell.english == 'Waterga II' then
+					newSpell = 'Waterga'	
+				elseif spell.english == 'Watera' then
+					newSpell = 'Watera III'
+				elseif spell.english == 'Watera III' then
+					newSpell = 'Waterg II'	
+				elseif spell.english == 'Watera II' then
 					newSpell = 'Waterga'	
 				end 
 			end
