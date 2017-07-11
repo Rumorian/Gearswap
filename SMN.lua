@@ -3,8 +3,10 @@
 -------------------------------------------------------------------------------------------------------------------
  
 -- You'll need the Shortcuts addon to handle the auto-targetting of the custom pact commands.
--- I really recommend if you use this, it's on a full keyboard it uses a lot of keybinds.  If you are imaginative there is enough keybinds using window and app key to go around though.  A supported macro keyboard also helps.  I use a Strix Tactic Pro that a windower developer kindly made work with Windower.
---
+-- I really recommend if you use this, it's on a full keyboard it uses a lot of keybinds.  
+-- If you are imaginative there is enough keybinds using window and app key to go around though.  
+-- A supported macro keyboard also helps.  I use a Strix Tactic Pro that a windower developer kindly made work with Windower.
+
  
 display_hud = false -- can toggle with app/menu key + 0
 display_icon = true -- disable on slower machines
