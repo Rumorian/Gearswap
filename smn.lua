@@ -1,6 +1,6 @@
 --lua created by Pergatory: https://pastebin.com/Fa5PtueC
 
--- Modifications by Rumorian:
+-- Modifications by Rumorian: 
 
 -- replaced console_echo with windower.add_to_chat(159,' to have status displayed in chatlog instead of Windower console. 
 
