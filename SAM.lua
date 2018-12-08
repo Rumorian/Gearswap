@@ -67,17 +67,17 @@ function init_gear_sets()
     sets.precast.Waltz = {}
 	
 	sets.precast.RA = {
-		head="Ryuo Somen",
+		head="Wakido Kabuto +1",
 		body="Ryuo Domaru",
 		hands="Ryuo Tekko",
-		neck="Marked Gorget",
+		neck="Sanctity Necklace",
 		waist="Yemaya Belt",
-		lring="Hajduk Ring",
+		lring="Petrov Ring",
 		rring="Ilabrat Ring",
 		lear="Infused Earring",
 		rear="Suppanomimi",
 		legs="Kendatsuba Hakama",
-		feet="Thereoid Greaves"
+		feet="Ryuo Sune-Ate +1"
     }
 	
 	sets.precast.FC = {
@@ -95,7 +95,7 @@ function init_gear_sets()
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
-		ammo="Amar Cluster",
+		ammo="Knobkierrie",
 		head="Valorous Mask",
 		body="Ryuo Domaru",
 		hands={ name="Valorous Mitts", augments={'Accuracy+23 Attack+23','Weapon skill damage +4%','Attack+5',}},
@@ -103,10 +103,10 @@ function init_gear_sets()
 		feet="Valorous Greaves",
 		neck="Fotia Gorget",
 		waist="Fotia Belt",
-		left_ear="Cessance Earring",
+		left_ear="Moonshade Earring",
 		right_ear="Ishvara Earring",
 		back={ name="Smertrios's Mantle", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
-		left_ring="Skukuyu Ring",
+		left_ring="Shukuyu Ring",
 		right_ring="Karieyh Ring +1"
 	}
 
@@ -151,12 +151,10 @@ function init_gear_sets()
 
 	--Jinpu: 30% STR
     sets.precast.WS['Tachi: Jinpu'] = set_combine(sets.precast.WS, {
-		ammo="Pemphredo Tathlum",
 		neck="Fotia Gorget", 
 		waist="Fotia Belt",
 		body="Founder's Breastplate",
 		hands="Leyline Gloves",
-		lear="Friomisi Earring"
 	})
 
 	sets.precast.WS['Arching Arrow'] = sets.precast.RA
@@ -185,11 +183,12 @@ function init_gear_sets()
 		lring="Karieyh Ring +1",
 		rring="Defending Ring",
 		waist="Flume Belt",
-		feet="Ryuo Sune-Ate +1",
+		legs="Hizamaru Hizayoroi +2",
+		feet="Ryuo Sune-Ate +1"
 		}
 
    sets.idle.Town = set_combine(sets.idle.Field, {
-		feet="Danzo Sune-Ate"
+
    })
    
    
@@ -204,7 +203,7 @@ function init_gear_sets()
 
     sets.defense.MDT = {}
 
-    sets.Kiting = {feet="Danzo Sune-ate"}
+    sets.Kiting = {}
 
     sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
 
