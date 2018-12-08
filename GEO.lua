@@ -86,14 +86,13 @@ function init_gear_sets()
 		head="Vanya Hood", --10
 		waist="Witful Belt", --3
 		lear="Loquacious Earring",  -- 2
-		body="Eirene's Manteel",  --10
-		hands="Telchine Gloves",  --4
+		body="Shango Robe",  --8
 		back="Lifestream Cape",  --7
 		legs="Geomancy Pants +1",  --11
 		ring1="Prolix ring",  --2
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+2','"Fast Cast"+5','MND+2','"Mag.Atk.Bns."+10',}}, --10
 		ring2="Kishar Ring"  --5
-		} -- 73 without /RDM
+		} -- 67 without /RDM
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
 		waist="Siegel Sash"})
@@ -122,7 +121,7 @@ function init_gear_sets()
 	sets.precast.WS = {
 		head="Jhakri Coronal +2",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		legs="Jhakri Slops +2",
 		feet="Jhakri Pigaches +2"}
 
@@ -134,10 +133,10 @@ function init_gear_sets()
 		ear1="Friomisi Earring",
 		ear2="Mache Earring",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		ring1="Rufescent Ring",
 		waist="Fotia Belt",
-		legs="Vanya Slops",
+		legs="Jhakri Slops +2",
 		feet="Jhakri Pigaches +2"}
 
 	-- Exudation 50% MND 50% INT
@@ -147,7 +146,7 @@ function init_gear_sets()
 		ear1="Cessance Earring",
 		ear2="Mache Earring",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		ring1="Rufescent Ring",
 		waist="Latria Sash",
 		legs="Jhakri Slops +2",
@@ -160,7 +159,7 @@ function init_gear_sets()
 		ear1="Friomisi Earring",
 		ear2="Mache Earring",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		ring1="Rufescent Ring",
 		ring2="Karieyh Ring +1",
 		waist="Latria Sash",
@@ -174,9 +173,9 @@ function init_gear_sets()
 		ear1="Barkarole Earring",
 		ear2="Mache Earring",
 		body="Jhakri Robe +2",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		ring1="Rufescent Ring",
-		ring2="Ifrit Ring",
+		ring2="Shukuyu Ring",
 		waist="Latria Sash",
 		legs="Jhakri Slops +2",
 		feet="Jhakri Pigaches +2"}
@@ -192,12 +191,13 @@ function init_gear_sets()
 		head="Vanya Hood", --10
 		waist="Witful Belt", --3
 		lear="Loquacious Earring",  -- 2
-		body="Eirene's Manteel",  --10
+		body="Shango Robe",  --8
 		hands="Telchine Gloves",  --4
 		back="Lifestream Cape",  --7
 		legs="Geomancy Pants +1",  --11
 		ring1="Prolix ring",  --2
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+2','"Fast Cast"+5','MND+2','"Mag.Atk.Bns."+10',}}, --10
+		back={ name="Nantosuelta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Haste+10',}},  -- Haste 10%
 		ring2="Kishar Ring",  --5
 		} 
 	
@@ -245,7 +245,7 @@ function init_gear_sets()
 		ring2="Sirona's Ring",
         back="Solemnity Cape", --7
 		waist="Gishdubar Sash", --10 self
-		legs="Vanya Slops",
+		legs="Assiduity Pants +1", --Enmity -6
 		feet="Vanya Clogs" --10
 		}
 		
@@ -264,7 +264,7 @@ function init_gear_sets()
 		neck="Baetyl Pendant", --4
 		head="Vanya Hood", --10
 		lear="Loquacious Earring",  -- 2
-		body="Eirene's Manteel",  --10
+		body="Shango Robe",  --8
 		hands="Telchine Gloves",  --4
 		back="Lifestream Cape",  --7
 		legs="Geomancy Pants +1",  --11
@@ -274,21 +274,23 @@ function init_gear_sets()
 
 		--GEO has no enhancing magic skill
 	sets.midcast['Enhancing Magic'] = {
-		head="Telchine Cap",  --Duration +5
+		sub="Ammurapi Shield", --Duration +10%
+		head="Telchine Cap",  --Duration +8
 		neck="Incanter's Torque",
-		body={ name="Telchine Chas.", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +8',}}, --Duration +8, skill +12
+		body={ name="Telchine Chas.", augments={'"Elemental Siphon"+25','Enh. Mag. eff. dur. +8',}}, --Duration +8, skill +12
 		hands="Telchine Gloves", --Duration +9
 		waist="Latria Sash",
-		feet="Telchine Pigaches", --Duration +7
+		feet="Telchine Pigaches", --Duration +8
 		ring1="Vertigo Ring",
-		ring2="Stikini Ring +1",
-		legs="Vanya Slops",
-		lear="Static Earring"
-		}
+		legs={ name="Telchine Braconi", augments={'Attack+5','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}, --Duration +10%
+		back={ name="Nantosuelta's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Haste+10',}},  --Haste 10%
+		ring2="Stikini Ring +1"
+				}
+		--Duration +43%		
 		
+	sets.midcast.Haste = sets.midcast['Enhancing Magic']
+	
 	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-		legs={ name="Telchine Braconi", augments={'Attack+5','"Fast Cast"+3','"Regen" potency+1',}},
-		main="Bolelabunga", --Regen potency +10%
 		})
 		--Telchine Chasuble = Regen duration +12, enhancing duration +8
 	
@@ -305,6 +307,7 @@ function init_gear_sets()
 		}) 
 
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {
+		head="Amalric Coif +1"
 		})
 
 	sets.midcast.Protectra = {
@@ -314,6 +317,7 @@ function init_gear_sets()
 
 	sets.midcast.MndEnfeebles = {
 		main="Idris", --Macc 40
+		sub="Ammurapi Shield", --Macc 38
 		head="Befouled Crown", --Enfeebling 16, Macc 20
 		neck="Incanter's Torque", --Enfeebling 10
 		body="Geomancy Tunic +3", --Macc 50 + set bonus
@@ -326,22 +330,22 @@ function init_gear_sets()
 		back="Lifestream Cape", --Enfeebling 10
 		legs="Psycloth Lappas", --Enfeebling 18, Macc 35
 		feet="Geomancy Sandals +3", --Macc 46
-		sub="Culmnus"
+		sub="Culminus"
 		} -- MND/Magic accuracy
 		
 		--Dunna: Macc 10
-		--Total: 84 Enfeebling, 220 Macc
+		--Total: 481 Skill, 220 Macc
 	
 	sets.midcast.IntEnfeebles = set_combine(sets.midcast.MndEnfeebles, {
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
 		}) -- INT/Magic accuracy
 
 	sets.midcast['Dark Magic'] = {
 		main="Rubicundity",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Magic burst dmg.+10%','INT+4','"Mag.Atk.Bns."+10',}},
 		body="Geomancy Tunic +3",
-		hands="Jhakri Cuffs +1",
+		hands="Jhakri Cuffs +2",
 		neck="Erra Pendant",
 		ammo="Azimuth Gloves +1",
 		legs="Azimuth Tights +1",
@@ -352,7 +356,7 @@ function init_gear_sets()
 		ring1="Stikini Ring +1",
 		ring2="Evanescence Ring",
 		waist="Tengu-no-Obi",
-		sub="Culminus"
+		sub="Ammurapi Shield"
 		}
 	
 	sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
@@ -371,21 +375,23 @@ function init_gear_sets()
 	sets.midcast['Elemental Magic'] = {
 		main="Idris",
 		head={ name="Merlinic Hood", augments={'Mag. Acc.+24 "Mag.Atk.Bns."+24','INT+5','"Mag.Atk.Bns."+14',}},
-		neck="Mizukage-no-Kubikazari",
-	    ear1="Barkarole Earring",
-		ear2="Choleric Earring",
-		body="Count's Garb",
-		ring1="Stikini Ring +1",
-		ring2="Resonance Ring",
-		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
-		waist="Tengu-No-Obi",
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
+		neck="Mizukage-No-Kubikazari",
+		lear="Friomisi Earring",
+		rear="Barkarole Earring",
+		body="Jhakri Robe +2",
 		hands="Amalric Gages +1",
-		sub="Culminus"}
+		lring="Resonance Ring",
+		rring="Stikini Ring +1",
+		waist="Refoccilation Stonei",
+		legs="Jhakri Slops +2",
+		feet="Jhakri Pigaches +2",		
+		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
+		sub="Ammurapi Shield"}
+		
+
 
 	sets.midcast['Elemental Magic'].Resistant = set_combine(sets.midcast['Elemental Magic'], {
-		body="Jhakri Robe +2"
+
 		})
 
 	sets.midcast.GeoElem = set_combine(sets.midcast['Elemental Magic'], {
@@ -416,10 +422,10 @@ function init_gear_sets()
 		ring2="Stikini Ring +1", 
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
 		waist="Refoccilation Stone",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}}, --9
 		body="Ea Houppelande", --8, 8 II
-		sub="Culminus"}   
+		sub="Ammurapi Shield"}   
 		--47 + 19 total
 
 	------------------------------------------------------------------------------------------------
@@ -436,8 +442,8 @@ function init_gear_sets()
 		rear="Eabani Earring",
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}},
 		waist="Slipor Sash",
-		ring1="Stikini Ring +1",
-		ring2="Defending Ring",
+		ring2="Stikini Ring +1",
+		ring1="Defending Ring",
 		legs="Assiduity Pants +1",
 		feet="Geomancy Sandals +3",
 		sub="Genmei Shield"
@@ -471,8 +477,8 @@ function init_gear_sets()
 		rear="Eabani Earring",
 		body={ name="Telchine Chas.", augments={'Mag. Evasion+16','Pet: "Regen"+3','Pet: Damage taken -3%',}}, -- pet dt 3, regen 3
 		hands={ name="Merlinic Dastanas", augments={'DEX+4','AGI+8','"Refresh"+2',}},
-		lring="Vengeful Ring", 
-		rring="Defending Ring",
+		rring="Stikini Ring +1", 
+		lring="Defending Ring",
 		waist="Slipor Sash", 
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}}, -- pet regen 15
 		legs={ name="Telchine Braconi", augments={'Mag. Evasion+18','Pet: "Regen"+3','Pet: Damage taken -4%',}}, -- pet dt 4, regen 3
@@ -489,7 +495,7 @@ function init_gear_sets()
 		main="Idris",
 		body="Geomancy Tunic +3",
 		feet="Geomancy Sandals +3",
-		sub="Culminus"
+		sub="Ammurapi Shield"
 		})
 		
 	-- Defense sets
@@ -518,7 +524,7 @@ function init_gear_sets()
 		neck="Loricate Torque",
 		rear="Infused Earring",
 		waist="Fucho-No-Obi",
-		ring1="Shukuyu Ring",
+		ring1="Vengeful Ring",
 		ring2="Defending Ring",
 		legs="Assiduity Pants +1",
 		feet="Geomancy Sandals +3",
@@ -548,7 +554,7 @@ function init_gear_sets()
 		ear1="Cessance Earring",
 		ear2="Mache Earring",
 		body="Jhakri Robe +2",  --1
-		hands="Jhakri Cuffs +1",  --0
+		hands="Jhakri Cuffs +2",  --0
 		ring1="Etana Ring",
 		ring2="Petrov Ring",
 		waist="Windbuffet Belt +1",  
@@ -574,7 +580,7 @@ function init_gear_sets()
 		ring2="Resonance Ring", 
 		back={ name="Nantosuelta's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
 		waist="Refoccilation Stone",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
 		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}}, --9
 		body="Ea Houppelande", --8, 8 II
 		sub="Culminus"}   
