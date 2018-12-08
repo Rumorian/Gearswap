@@ -73,14 +73,14 @@ function init_gear_sets()
     sets.precast.FC = {
 		head="Carmine Mask +1",  -- 14%
 		neck="Baetyl Pendant", -- 4%
-		body="Eirene's Manteel",  -- 10%
+		body="Shango Robe",  -- 8%
 		hands="Leyline Gloves",  -- 7%
 		waist="Witful Belt",  -- 3%
 		legs="Psycloth Lappas",  -- 7%
 		feet="Merlinic Crackows",  -- 5%
 		lring="Prolix Ring"  -- 2%
 		}
-		-- Total: 52%, Colada = 4%
+		-- Total: 50%, Colada = 4%
 
 	sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
 
@@ -97,8 +97,8 @@ function init_gear_sets()
 	sets.precast.FC['Elemental Magic'] = set_combine(sets.precast.FC, {})
 
 	sets.precast.FC.Impact = set_combine(sets.precast.FC['Elemental Magic'], {
-		head=empty,
-		body="Twilight Cloak"
+--		head=empty,
+--		body="Twilight Cloak"
 		})
 
 	sets.precast.Storm = set_combine(sets.precast.FC, {}) -- stop quick cast
@@ -144,6 +144,7 @@ function init_gear_sets()
 		legs="Carmine Cuisses +1"})
 
 	sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS, {
+		head="Vitiation Chapeau +2",
 		neck="Lacono Necklace +1",
 		lear="Sherida Earring",
 		rear="Ishvara Earring"
@@ -183,12 +184,11 @@ function init_gear_sets()
 	sets.midcast.Cure = {
 		head="Vanya Hood", --10
 		body="Vanya Robe", 
-		hands="Kaykaus Cuffs", --10
+		hands="Telchine Gloves", --10
 		legs="Atrophy Tights +1", --10, healing magic 13
 		feet={ name="Vanya Clogs", augments={'"Cure" potency +5%','"Cure" spellcasting time -15%','"Conserve MP"+6',}}, --10
 		neck="Incanter's Torque",
 		waist="Rumination Sash", --Spell interruption -10%
-		lear="Static Earring",
 		rear="Mendi. Earring", --5
 		lring="Stikini Ring +1",
 		rring="Sirona's Ring",
@@ -208,14 +208,14 @@ function init_gear_sets()
 	sets.midcast.StatusRemoval = {
 		head="Carmine Mask +1",  -- 12%
 		neck="Baetyl Pendant", -- 4%
-		body="Eirene's Manteel",  -- 10%
+		body="Shango Robe",  -- 8%
 		hands="Leyline Gloves",  -- 7%
 		waist="Witful Belt",  -- 3%
 		legs="Psycloth Lappas",  -- 7%
 		feet="Merlinic Crackows",  -- 5%
 		lring="Prolix Ring"  -- 2%
 		}
-		-- Total FC: 50%
+		-- Total FC: 48%
 
 		
 	sets.midcast.Cursna = set_combine(sets.midcast.StatusRemoval, {
@@ -231,7 +231,6 @@ function init_gear_sets()
 		head="Telchine Cap",
 		neck="Incanter's Torque",
 		lear="Loquacious Earring",
-		rear="Static Earring",
 		body="Telchine Chasuble",
 		hands="Atrophy Gloves +3",  
 		lring="Vertigo Ring",
@@ -245,23 +244,22 @@ function init_gear_sets()
 	
 	sets.midcast.EnhancingDuration = {
 		main="Oranyan",
-		head={ name="Telchine Cap", augments={'Accuracy+9','"Fast Cast"+5','Enh. Mag. eff. dur. +8',}},
-		neck="Incanter's Torque",
+		head="Telchine Cap", 
+		neck="Duelist's Torque +1",
 		lear="Loquacious Earring",
-		rear="Static Earring",
-		body={ name="Telchine Chas.", augments={'"Fast Cast"+3','Enh. Mag. eff. dur. +8',}},
+		body={ name="Telchine Chas.", augments={'"Elemental Siphon"+25','Enh. Mag. eff. dur. +8',}},
 		hands="Atrophy Gloves +3",  
 		lring="Vertigo Ring",
 		rring="Rufescent Ring",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		waist="Latria Sash",
-		legs="Carmine Cuisses +1",  -- Spell Interruption
-		feet="Lethargy houseaux +1",
+		legs={ name="Telchine Braconi", augments={'Attack+5','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}},
+		feet="Lethargy houseaux +1", -- +30%
 		sub="Enki Strap"
 	}
 
 	sets.midcast.Regen = set_combine(sets.midcast.EnhancingDuration, {
-		legs={ name="Telchine Braconi", augments={'Attack+5','"Fast Cast"+3','"Regen" potency+1',}},
+	
 		})
 
 
@@ -294,8 +292,8 @@ function init_gear_sets()
 	sets.midcast.MndEnfeebles = {
 		main="Grioavolr", --Macc +44, Skill +15
 		ammo="Pemphredo Tathlum",  --Macc +8
-		head="Vitiation Chapeau +1",  --Skill +22
-		neck="Incanter's Torque", --Skill +10
+		head="Vitiation Chapeau +2",  --Skill +24, Macc +27
+		neck="Duelist's Torque +1", --Macc +25
 		lear="Gwati Earring",  --Macc +8
 		rear="Lempo Earring",  --Macc +5
 		body="Atrophy Tabard +3",  --Skill +21, Macc +55
@@ -306,9 +304,9 @@ function init_gear_sets()
 		waist="Rumination Sash",  --Macc +3, Skill +7
 		legs="Psycloth Lappas",  --Macc +35, Skill +18
 		feet="Medium's Sabots",  --Macc +25, Skill +15
-		sub="Enki Strap",  --Macc +10
+		sub="Mephitis Grip",  --Macc +5, Skill +5
 	}
-	--Skill 611, Macc +263
+	--Skill 608, Macc +310
 	
    sets.midcast.MndEnfeeblesAcc = set_combine(sets.midcast.MndEnfeebles, {
 	
@@ -327,9 +325,9 @@ function init_gear_sets()
 	sets.midcast.ElementalEnfeeble = sets.midcast['Enfeebling Magic']
 
 
-	sets.midcast['Dia III'] = set_combine(sets.midcast['Enfeebling Magic'], {})
+	sets.midcast['Dia III'] = set_combine(sets.midcast.MndEnfeebles, {})
 
-	sets.midcast['Slow II'] = set_combine(sets.midcast['Enfeebling Magic'], {})
+	sets.midcast['Slow II'] = set_combine(sets.midcast.MndEnfeebles, {})
 
 	sets.midcast['Dark Magic'] = {
 		main="Rubicundity",
@@ -344,7 +342,7 @@ function init_gear_sets()
 		rring="Stikini Ring +1",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		waist="Tengu-No-Obi",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
 		feet="Jhakri Pigaches +2",
 		sub="Culminus"
 	}
@@ -373,7 +371,7 @@ function init_gear_sets()
 		lring="Stikini Ring +1",
 		rring="Resonance Ring",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},
 		legs="Jhakri Slops +2",
 		waist="Tengu-No-Obi",
 		sub="Enki Strap"}
@@ -400,10 +398,10 @@ function init_gear_sets()
 	sets.midcast.Helix = {
 		main="Grioavolr",
 		ammo="Pemphredo Tathlum",
-		head={ name="Merlinic Hood", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Magic burst mdg.+10%','INT+4','"Mag.Atk.Bns."+10',}},
+		head={ name="Merlinic Hood", augments={'Mag. Acc.+19 "Mag.Atk.Bns."+19','Magic burst dmg.+10%','INT+4','"Mag.Atk.Bns."+10',}},
 		body="Witching Robe",
-		hands={ name="Amalric Gages +1", augments={'INT+10','Mag. Acc.+15','"Mag.Atk.Bns."+15',}},
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
+		hands="Amalric Gages +1",
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}},
 		feet="Jhakri Pigaches +2",
 		neck="Mizukage-No-Kubikazari",
 		waist="Tengu-no-Obi",
@@ -411,7 +409,7 @@ function init_gear_sets()
 		right_ear="Choleric Earring",
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		left_ring="Mujin Band",
-		right_ring="Locus Ring",
+		right_ring="Vertigo Ring",
 		sub="Enki Strap"}
 	-- Helix has low dINT modifier and benefits highly from magic damage
 		
@@ -420,7 +418,6 @@ function init_gear_sets()
 		head="Lethargy Chappel +1",
 		neck="Incanter's Torque",
 		lear="Loquacious Earring",
-		rear="Static Earring",
 		body="Lethargy Sayon +1",
 		hands="Atrophy Gloves +3",
 		lring="Vertigo Ring",
@@ -445,8 +442,8 @@ function init_gear_sets()
         ring1="Mujin Band", --5 II
 		ring2="Resonance Ring", 
 		waist="Tengu-No-Obi",
-		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst mdg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
-		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst mdg.+9%','INT+14',}},  --9
+		legs={ name="Merlinic Shalwar", augments={'Mag. Acc.+22 "Mag.Atk.Bns."+22','Magic burst dmg.+10%','CHR+8','Mag. Acc.+7','"Mag.Atk.Bns."+1',}}, --10
+		feet={ name="Merlinic Crackows", augments={'Mag. Acc.+21 "Mag.Atk.Bns."+21','Magic burst dmg.+9%','INT+14',}},  --9
 		back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
 		neck="Mizukage-no-Kubikazari",
 		sub="Enki Strap"} --10
@@ -461,7 +458,7 @@ function init_gear_sets()
 		main="Grioavolr",
 		sub="Enki Strap",
 		ammo="Homiliary",
-		head="Vitiation chapeau +1",
+		head="Vitiation Chapeau +2",
 		neck="Loricate Torque",
 		lear="Eabani Earring",
 		rear="Hearty Earring",
@@ -482,7 +479,7 @@ function init_gear_sets()
 	sets.idle.Town = set_combine(sets.idle, {
 		main="Grioavolr",
 		sub="Enki Strap",
-		lring="Stikini Ring +1"
+		neck="Duelist's Torque +1"
 		})
 
 	sets.idle.Weak = sets.idle.DT
@@ -516,20 +513,19 @@ function init_gear_sets()
 		lring="Ilabrat Ring",
 		rring="Petrov Ring",
 		back={ name="Sucellos's Cape", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10',}},
-		waist="Sarissaphoroi Belt",  --Haste 3%
+		waist="Dynamic Belt +1",  --Haste 6%
 		legs="Carmine Cuisses +1",  -- Haste 6%
 		feet={ name="Merlinic Crackows", augments={'Attack+21','Pet: VIT+14','Quadruple Attack +3','Accuracy+19 Attack+19','Mag. Acc.+14 "Mag.Atk.Bns."+14',}}, --Haste 3%
-		--feet="Jhakri Pigaches +2"
 	}
-	-- Haste 25%
+	-- Haste 28%
 
 	sets.buff.Doom = {
 		ring1="Saida Ring", 
-		ring2="Defending Ring", 
+		ring2="Ephedra Ring", 
 		waist="Gishdubar Sash"}
 
-	sets.Obi = {waist="Hachirin-no-Obi"}
-	sets.CP = {back="Mecisto. Mantle"}
+	sets.Obi = {}
+	sets.CP = {}
 
 end
 
