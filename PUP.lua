@@ -8,6 +8,8 @@ function get_sets()
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 	send_command('wait 2;input /lockstyleset 10')
+	send_command('lua l autocontrol')
+	send_command('lua l pettp')
 end
 
 
@@ -60,6 +62,11 @@ function user_setup()
     select_default_macro_book()
 end
 
+function file_unload(file_name)
+ 
+	send_command('lua u autocontrol')
+	send_command('lua u pettp')
+end
 
 -- Define sets used by this job file.
 function init_gear_sets()
@@ -68,16 +75,16 @@ function init_gear_sets()
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-	head="Herculean Helm", --7
-	body="Vrikodara Jupon", --5
-	neck="Baetyl Pendant", --4
-	lear="Loquacious Earring",  --2
-	lring="Prolix Ring", --2
-	rring="Rahab Ring", --2
-	legs="Gyve Trousers"} --4
+		head="Herculean Helm", --7
+		body="Vrikodara Jupon", --5
+		neck="Baetyl Pendant", --4
+		lear="Loquacious Earring",  --2
+		lring="Prolix Ring", --2
+		rring="Rahab Ring", --2
+		legs="Gyve Trousers"} --4
 	--26 total
 
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads"})
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {})
 
     
     -- Precast sets to enhance JAs
@@ -87,23 +94,23 @@ function init_gear_sets()
 
 	sets.precast.JA['Overdrive'] = {Body="Pitre Tobe"}
 
-    sets.precast.JA['Activate'] = {head="Pitre Taj"}
+    sets.precast.JA['Activate'] = {head="Pitre Taj +1"}
 
 	sets.precast.JA['Repair'] = {
 		feet="Foire Babouches +1",
+		legs={ name="Herculean Trousers", augments={'"Repair" potency +8%','Pet: Accuracy+12 Pet: Rng. Acc.+12','Accuracy+17 Attack+17',}},
 		lear="Pratik Earring"}
 
     sets.precast.JA.Maneuver = {
-		body="Karagoz Farsetto",
-		back="Visucius's Mantle",
-		lear="Burana Earring"}
+		body="Karagoz Farsetto +1",
+		hands="Foire Dastanas +2",
+		}
 
 
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
-        head="Sukeroku Hachimaki",
-		feet="Rawhide Boots"}
+	}
         
     -- Don't need any special gear for Healing Waltz.
     sets.precast.Waltz['Healing Waltz'] = {}
@@ -113,75 +120,78 @@ function init_gear_sets()
     -- Default set for any weaponskill that isn't any more specifically defined
     sets.precast.WS = {
         head="Rao Kabuto",
-		body="Ryuo Domaru",
+		neck="Sanctity Necklace",
+		lear="Steelflash Earring",
+		rear="Bladeborn Earring",
+		body={"Ryuo Domaru", augments={'STR+10','DEX+10','Accuracy+15',}},
 		ring1="Rufescent Ring",
-		ring2="Ifrit Ring",
-        hands={ name="Rao Kote", augments={'STR+10','DEX+10','Attack+15',}},
+		ring2="Shukuyu Ring",
+        hands={"Ryuo Tekko", augments={'STR+10','DEX+10','Accuracy+15',}},
 		legs="Rao Haidate",
-		feet="Ryuo Sune-Ate"}
+		feet="Ryuo Sune-Ate +1"
+		}
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
 		-- 32% STR 32% VIT
-     sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {
-		head="Rao Kabuto",
-		neck="Flame Gorget",
-		body="Ryuo Domaru",
+    sets.precast.WS['Stringing Pummel'] = set_combine(sets.precast.WS, {
+		neck="Fotia Gorget",
 		ring1="Shukuyu Ring",
-		ring2="Ifrit Ring",
-		waist="Windbuffet Belt +1",
-		hands="Ryuo Tekko",
-		legs="Rao Haidate",
-		feet="Ryuo Sune-Ate"})
+		ring2="Begrudging Ring",
+		waist="Windbuffet Belt +1"
+		})
 		
 		-- 80% STR
-	   sets.precast.WS['Victory Smite'] = set_combine(sets.precast.WS, {
-		head="Rao Kabuto",
-		body="Ryuo Domaru",
-		neck="Breeze Gorget",
-		lear="Steelflash Earring",
-		rear="Bladeborn Earring",
-		hands="Ryuo Tekko",
+	sets.precast.WS['Victory Smite'] = set_combine(sets.precast.WS, {
+		neck="Fotia Gorget",
 		lring="Shukuyu Ring",
-		rring="Ifrit Ring",
-		waist="Latria Sash",
-		legs="Rao Haidate",
-		feet="Ryuo Sune-Ate"
+		waist="Fotia Belt"
 		})
     
 		-- DEX
-     sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {
-		feet={ name="Herculean Boots", augments={'Accuracy+24 Attack+24','Crit.hit rate+1','DEX+4','Attack+7',}},
-		hands="Ryuo Tekko",
-		ring2="Ramuh Ring",
-		legs="Samnuha Tights"})
+    sets.precast.WS['Shijin Spiral'] = set_combine(sets.precast.WS, {
+		neck="Shulmanu Collar",
+		feet={ name="Herculean Boots", augments={'Accuracy+22 Attack+22','Crit. hit damage +3%','DEX+3','Attack+9',}},
+		lear="Mache Earring",
+		rear="Cessance Earring",
+		ring1="Petrov Ring",
+		waist="Latria Sash",
+		legs="Tali'ah Seraweels +2"
+		})
 
     
     -- Midcast Sets
 
 	sets.midcast.Cure = {
-		head="Sukeroku Hachimaki",
 		body="Vrikodara Jupon",
-		neck="Incanter's Torque", 
+		neck="Phalaina Locket", 
 		ear1="Mendicant's Earring",
 		hands="Rawhide Gloves", 
-		ring1="Stikini Ring",
+		ring1="Stikini Ring +1",
 		ring2="Sirona's Ring",
-        back="Solemnity Cape", 
-		waist="Gishdubar Sash", 
+ 		waist="Gishdubar Sash", 
 		legs="Gyve Trousers"
 				}
 	
     sets.midcast.FastRecast = {
-	head="Herculean Helm", --7
-	body="Vrikodara Jupon", --5
-	neck="Baetyl Pendant", --4
-	lear="Loquacious Earring",  --2
-	lring="Prolix Ring", --2
-	rring="Rahab Ring", --2
-	legs="Gyve Trousers"} --4
+		head="Herculean Helm", --7
+		body="Vrikodara Jupon", --5
+		neck="Baetyl Pendant", --4
+		lear="Loquacious Earring",  --2
+		lring="Prolix Ring", --2
+		rring="Rahab Ring", --2
+		legs="Gyve Trousers"} --4
 	--26 total
         
+	sets.midcast.Stoneskin = {
+		head="Herculean Helm",
+		neck="Incanter's Torque",
+		lear="Loquacious Earring",
+		body="Vrikodara Jupon",
+		lring="Stikini Ring +1",
+		rring="Vertigo Ring",
+		waist="Siegel Sash",
+		legs="Haven Hose"}
 
     -- Midcast sets for pet actions
     sets.midcast.Pet.Cure = {}
@@ -194,86 +204,68 @@ function init_gear_sets()
     -- Sets to return to when not performing an action.
     
     -- Resting sets
-    sets.resting = {head="Pitre Taj +1",	
-	body="Hizamaru Haramaki +1",
-	hands={ name="Rao Kote", augments={'STR+10','DEX+10','Attack+15',}},
-    legs="Rao Haidate",
-	neck="Bathy Choker +1", 
-	lear="Burana Earring",
-	rear="Infused Earring",
-	ring1="Paguroidea Ring",
-	feet="Rao Sune-Ate",
-	waist="Isa Belt"}
+    sets.resting = {
+		head="Pitre Taj +1",	
+		body="Hizamaru Haramaki +1",
+		hands="Rao Kote",
+		legs="Rao Haidate",
+		neck="Sanctity Necklace", 
+		rear="Infused Earring",
+		ring1="Vengeful Ring",
+		feet="Rao Sune-Ate",
+		waist="Isa Belt"}
     
 
     -- Idle sets
 
-    sets.idle = {head="Pitre Taj +1",
-	body="Hizamaru Haramaki +1",
-	hands={ name="Rao Kote", augments={'STR+10','DEX+10','Attack+15',}},
-    legs="Rao Haidate",
-	neck="Bathy Choker +1", 
-	lear="Burana Earring",
-	rear="Infused Earring",
-	ring1="Paguroidea Ring",
-	feet="Hermes' Sandals",
-	waist="Isa Belt"}
+    sets.idle = {
+		head="Pitre Taj +1",
+		body="Hizamaru Haramaki +1",
+		hands="Rao Kote",
+		legs="Rao Haidate",
+		neck="Sanctity Necklace", 
+		rear="Infused Earring",
+		ring1="Defending Ring",
+		feet="Rao Sune-Ate",
+		waist="Isa Belt"}
 
-    sets.idle.Town = set_combine(sets.idle, {body="Councilor's Garb"})
+    sets.idle.Town = set_combine(sets.idle, {feet="Hermes' Sandals"})
 
     -- Set for idle while pet is out (eg: pet regen gear)
     sets.idle.Pet = sets.idle
 
     -- Idle sets to wear while pet is engaged
     sets.idle.Pet.Engaged = {
-    body="Rao Togi",
-	head={ name="Herculean Helm", augments={'Pet: Accuracy+29 Pet: Rng. Acc.+29','Pet: "Dbl.Atk."+3 Pet: Crit.hit rate +3','Pet: INT+7',}},
-	neck="Twilight Torque",
-	lear="Domesticator's Earring",
-	rear="Handler's Earring +1",
-	feet="Rao Sune-Ate",
-	rring="Thurandaut Ring",
-	legs={ name="Herculean Trousers", augments={'Pet: Accuracy+24 Pet: Rng. Acc.+24','Pet: Phys. dmg. taken -3%','Pet: VIT+11','Pet: Attack+15 Pet: Rng.Atk.+15','Pet: "Mag.Atk.Bns."+4',}},
-	waist="Isa Belt",
-	hands={ name="Rao Kote", augments={'Pet: HP+100','Pet: Accuracy+15','Pet: Damage taken -3%',}},
-	lring="Paguroidea Ring"}
+		body="Rao Togi", --DT -3
+		head="Tali'ah Turban +2",
+		neck="Shulmanu Collar",
+		lear="Domesticator's Earring",
+		rear="Handler's Earring +1", --Physical dmg -4
+		feet="Rao Sune-Ate", --DT -3
+		rring="Varar Ring",
+		legs="Tali'ah Seraweels +2", --DT -5
+		waist="Isa Belt", --DT -3
+		hands={ name="Rao Kote", augments={'Pet: HP+100','Pet: Accuracy+15','Pet: Damage taken -3%',}}, --DT -3
+		lring="Defending Ring"}
+	
+		-- DT -16 + Midnights -3 = DT -19
+		--Physical -4
+		
+		--Pet innate dt -50, 37.5% needed to cap
+		
 
     sets.idle.Pet.Engaged.Ranged = set_combine(sets.idle.Pet.Engaged, {
-	body="Rao Togi",
-	lear="Burana Earring",
-	head={ name="Herculean Helm", augments={'Pet: Accuracy+29 Pet: Rng. Acc.+29','Pet: "Dbl.Atk."+3 Pet: Crit.hit rate +3','Pet: INT+7',}},
-	rear="Handler's Earring +1",
-	neck="Twilight Torque",
-	lring="Overbearing Ring",
-	rring="Thurandaut Ring",
-	legs={ name="Herculean Trousers", augments={'Pet: Accuracy+24 Pet: Rng. Acc.+24','Pet: Phys. dmg. taken -3%','Pet: VIT+11','Pet: Attack+15 Pet: Rng.Atk.+15','Pet: "Mag.Atk.Bns."+4',}},
-	feet="Rao Sune-Ate",
-	hands={ name="Rao Kote", augments={'Pet: HP+100','Pet: Accuracy+15','Pet: Damage taken -3%',}},
-	waist="Isa Belt"})
+		waist="Klouskap Sash",
+		legs="Tali'ah Seraweels +2",
+		})
 
     sets.idle.Pet.Engaged.Nuke = set_combine(sets.idle.Pet.Engaged, {    
-	body="Pantin Tobe +2",
-	neck="Twilight Torque",
-	lear="Burana Earring",
-	rear="Handler's Earring +1",
-	lring="Overbearing Ring",
-	rring="Thurandaut Ring",
-	waist="Isa Belt",
-	feet="Rao Sune-Ate",
-	hands={ name="Rao Kote", augments={'Pet: HP+100','Pet: Accuracy+15','Pet: Damage taken -3%',}},
-	legs="Karagoz Pantaloni"})
+		body="Pitre Tobe",
+		legs="Tali'ah Seraweels +2",})
 
     sets.idle.Pet.Engaged.Magic = set_combine(sets.idle.Pet.Engaged, {
-    body="Pantin Tobe +2",
-	lear="Burana Earring",
-	rear="Handler's Earring +1",
-	neck="Twilight Torque",
-	lring="Overbearing Ring",
-	rring="Thurandaut Ring",
-	waist="Isa Belt",
-	feet="Rao Sune-Ate",
-	hands={ name="Rao Kote", augments={'Pet: HP+100','Pet: Accuracy+15','Pet: Damage taken -3%',}},
-	legs="Karagoz Pantaloni"})
+		body="Pitre Tobe"
+		})
 
 
     -- Defense sets
@@ -282,10 +274,9 @@ function init_gear_sets()
         head="Rao Kabuto",
 		neck="Sanctity Necklace",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-        hands="Herculean Gloves",
+		hands="Herculean Gloves",
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
+		ring2="Petrov Ring",
         waist="Windbuffet Belt +1",
 		legs="Herculean Trousers",
 		feet="Herculean Boots"}
@@ -294,10 +285,9 @@ function init_gear_sets()
         head="Rao Kabuto",
 		neck="Sanctity Necklace",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-        hands="Herculean Gloves",
+hands="Herculean Gloves",
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
+		ring2="Petrov Ring",
         waist="Windbuffet Belt +1",
 		legs="Herculean Trousers",
 		feet="Herculean Boots"}
@@ -307,9 +297,9 @@ function init_gear_sets()
 		neck="Sanctity Necklace",
 		ear1="Cessance Earring",
 		ear2="Brutal Earring",
-        hands="Herculean Gloves",
+hands="Herculean Gloves",
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
+		ring2="Petrov Ring",
         waist="Windbuffet Belt +1",
 		legs="Herculean Trousers",
 		feet="Herculean Boots"}
@@ -326,61 +316,69 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {
         head={ name="Herculean Helm", augments={'Accuracy+19 Attack+19','"Triple Atk."+3','Accuracy+15','Attack+4',}},
-		neck="Lissome Necklace",
+		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
 		ear2="Mache Earring",
-        body="Ryuo Domaru",
-		hands="Herculean Gloves",
+        body={"Ryuo Domaru", augments={'STR+10','DEX+10','Accuracy+15',}},
+		hands={ name="Herculean Gloves", augments={'Accuracy+10','"Triple Atk."+4','DEX+5','Attack+12',}},
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
-        legs={ name="Herculean Trousers", augments={'Accuracy+24 Attack+24','"Triple Atk."+3','STR+5','Accuracy+11','Attack+1',}},
+		ring2="Varar Ring",
+        legs="Tali'ah Seraweels +2",
 		feet={ name="Herculean Boots", augments={'Accuracy+19 Attack+19','"Triple Atk."+4','CHR+5','Accuracy+15',}},
-		waist="Windbuffet Belt +1"}
+		waist="Klouskap Sash"}
 
 		sets.engaged.Acc = {
         head={ name="Herculean Helm", augments={'Accuracy+19 Attack+19','"Triple Atk."+3','Accuracy+15','Attack+4',}},
 		neck="Lissome Necklace",
 		ear1="Cessance Earring",
 		ear2="Mache Earring",
-        body="Ryuo Domaru",
-		hands="Herculean Gloves",
+        body={"Ryuo Domaru", augments={'STR+10','DEX+10','Accuracy+15',}},
+		hands={ name="Herculean Gloves", augments={'Accuracy+10','"Triple Atk."+4','DEX+5','Attack+12',}},
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
-        legs={ name="Herculean Trousers", augments={'Accuracy+24 Attack+24','"Triple Atk."+3','STR+5','Accuracy+11','Attack+1',}},
+		ring2="Petrov Ring",
+          legs="Tali'ah Seraweels +2",
 		feet={ name="Herculean Boots", augments={'Accuracy+19 Attack+19','"Triple Atk."+4','CHR+5','Accuracy+15',}},
 		waist="Windbuffet Belt +1"}
 
 		sets.engaged.DT = {
         head="Rao Kabuto",
-		neck="Lissome Necklace",
+		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-        body="Ryuo Domaru",
-		hands="Herculean Gloves",
+        body={"Ryuo Domaru", augments={'STR+10','DEX+10','Accuracy+15',}},
+		hands={ name="Herculean Gloves", augments={'Accuracy+10','"Triple Atk."+4','DEX+5','Attack+12',}},
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
-        legs={ name="Herculean Trousers", augments={'Accuracy+24 Attack+24','"Triple Atk."+3','STR+5','Accuracy+11','Attack+1',}},
+		ring2="Varar Ring",
+          legs="Tali'ah Seraweels +2",
 		feet={ name="Herculean Boots", augments={'Accuracy+19 Attack+19','"Triple Atk."+4','CHR+5','Accuracy+15',}},
 		waist="Windbuffet Belt +1"}
 
 		sets.engaged.Acc.DT = {
         head="Rao Kabuto",
-		neck="Lissome Necklace",
+		neck="Shulmanu Collar",
 		ear1="Cessance Earring",
-		ear2="Brutal Earring",
-        body="Ryuo Domaru",
-		hands="Herculean Gloves",
+        body={"Ryuo Domaru", augments={'STR+10','DEX+10','Accuracy+15',}},
+		hands={ name="Herculean Gloves", augments={'Accuracy+10','"Triple Atk."+4','DEX+5','Attack+12',}},
 		ring1="Epona's Ring",
-		ring2="Rajas Ring",
-        legs={ name="Herculean Trousers", augments={'Accuracy+24 Attack+24','"Triple Atk."+3','STR+5','Accuracy+11','Attack+1',}},
+		ring2="Varar Ring",
+          legs="Tali'ah Seraweels +2",
 		feet={ name="Herculean Boots", augments={'Accuracy+19 Attack+19','"Triple Atk."+4','CHR+5','Accuracy+15',}},
-		waist="Windbuffet Belt +1"}
+		waist="Klouskap Sash"}
 end
 
 
 -------------------------------------------------------------------------------------------------------------------
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
+
+    -- Auto Remedy --
+function pretarget(spell,action)
+        if buffactive['Silence'] or buffactive['Paralysis'] then
+            if spell.action_type == 'Magic' or spell.type == 'JobAbility' then  
+                cancel_spell()
+                send_command('input /item "Remedy" <me>')
+            end            
+        end
+	end
 
 -- Called when pet is about to perform an action
 function job_pet_midcast(spell, action, spellMap, eventArgs)
@@ -499,17 +497,86 @@ function display_pet_status()
     end
 end
 
+-- Called for direct player commands.
+function job_self_command(cmdParams, eventArgs)
+	if cmdParams[1]:lower() == 'scholar' then
+		handle_strategems(cmdParams)
+		eventArgs.handled = true
+	elseif cmdParams[1]:lower() == 'nuke' then
+		handle_nuking(cmdParams)
+		eventArgs.handled = true
+	end
+end
+
+-- General handling of strategems in an Arts-agnostic way.
+-- Format: gs c scholar <strategem>
+function handle_strategems(cmdParams)
+	-- cmdParams[1] == 'scholar'
+	-- cmdParams[2] == strategem to use
+
+	if not cmdParams[2] then
+		add_to_chat(123,'Error: No strategem command given.')
+		return
+	end
+	local strategem = cmdParams[2]:lower()
+
+	if strategem == 'light' then
+		if buffactive['light arts'] then
+			send_command('input /ja "Addendum: White" <me>')
+		elseif buffactive['addendum: white'] then
+			add_to_chat(122,'Error: Addendum: White is already active.')
+		else
+			send_command('input /ja "Light Arts" <me>')
+		end
+	elseif strategem == 'dark' then
+		if buffactive['dark arts'] then
+			send_command('input /ja "Addendum: Black" <me>')
+		elseif buffactive['addendum: black'] then
+			add_to_chat(122,'Error: Addendum: Black is already active.')
+		else
+			send_command('input /ja "Dark Arts" <me>')
+		end
+	elseif buffactive['light arts'] or buffactive['addendum: white'] then
+		if strategem == 'cost' then
+			send_command('input /ja Penury <me>')
+		elseif strategem == 'speed' then
+			send_command('input /ja Celerity <me>')
+		elseif strategem == 'aoe' then
+			send_command('input /ja Accession <me>')
+		elseif strategem == 'addendum' then
+			send_command('input /ja "Addendum: White" <me>')
+		else
+			add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+		end
+	elseif buffactive['dark arts']  or buffactive['addendum: black'] then
+		if strategem == 'cost' then
+			send_command('input /ja Parsimony <me>')
+		elseif strategem == 'speed' then
+			send_command('input /ja Alacrity <me>')
+		elseif strategem == 'aoe' then
+			send_command('input /ja Manifestation <me>')
+		elseif strategem == 'addendum' then
+			send_command('input /ja "Addendum: Black" <me>')
+		else
+			add_to_chat(123,'Error: Unknown strategem ['..strategem..']')
+		end
+	else
+		add_to_chat(123,'No arts has been activated yet.')
+	end
+end
 
 
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
     -- Default macro set/book
     if player.sub_job == 'DNC' then
-        set_macro_page(2, 1)
+        set_macro_page(4, 1)
     elseif player.sub_job == 'NIN' then
-        set_macro_page(2, 1)
+        set_macro_page(4, 1)
     elseif player.sub_job == 'THF' then
-        set_macro_page(2, 1)
+        set_macro_page(4, 1)
+    elseif player.sub_job == 'SCH' then
+        set_macro_page(4, 1)
     else
         set_macro_page(2, 1)
     end
