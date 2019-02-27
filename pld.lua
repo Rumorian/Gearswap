@@ -61,45 +61,36 @@ function init_gear_sets()
     --------------------------------------
 	
     sets.precast.Enmity = {
-		head="Souveran Schaller",  --7
-		neck="Unmoving Collar", --9
-		waist="Creed Baudrier", --5
-		lear="Friomisi Earring",  --2
+		ammo="Egoist's Tathlum",
+		head="Souveran Schaller +1",  --7
+		neck="Moonbeam Necklace", --10
+		waist="Creed Baudrier", --5, HP +40
+		rear="Cryptic Earring", --4
 		body="Souveran Cuirass",  --17
-		hands="Macabre Gauntlets +1", --7
-		lring="Petrov Ring",  --4
-		rring="Apeile Ring +1", --5-9
-		back="Rudianos's Mantle", --7
-		legs="Souveran Diechlings", --7
-		feet="Eschite Greaves" --15
+		hands="Souveran Handschuhs", --7
+		rring="Eihwaz Ring", --5
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}}, --10
+		legs="Souveran Diechlings +1", --7
+		feet="Souveran Schuhs +1" 
 	}
-	--88-92
+	--80
+	--80
 	--Brilliance = 14
-	--Total = 102-106
+	--Total = 94
     
     -- Precast sets to enhance JAs
-    sets.precast.JA['Invincible'] = set_combine(sets.precast.Enmity, {legs="Caballarius Breeches"})
+    sets.precast.JA['Invincible'] = set_combine(sets.precast.Enmity, {legs="Caballarius Breeches +1"})
     sets.precast.JA['Holy Circle'] = set_combine(sets.precast.Enmity, {})
-    sets.precast.JA['Shield Bash'] = set_combine(sets.precast.Enmity, {hands="Caballarius Gauntlets"})
-    sets.precast.JA['Sentinel'] = set_combine(sets.precast.Enmity, {feet="Caballarius Leggings"})
-    sets.precast.JA['Rampart'] = set_combine(sets.precast.Enmity, {})
+    sets.precast.JA['Shield Bash'] = set_combine(sets.precast.Enmity, {hands="Caballarius Gauntlets +1"})
+    sets.precast.JA['Sentinel'] = set_combine(sets.precast.Enmity, {feet="Caballarius Leggings +1"})
+    sets.precast.JA['Rampart'] = set_combine(sets.precast.Enmity, {head="Caballarius Coronet +1"})
     sets.precast.JA['Fealty'] = set_combine(sets.precast.Enmity, {body="Caballarius Surcoat"})
     sets.precast.JA['Divine Emblem'] = set_combine(sets.precast.Enmity, {})
     sets.precast.JA['Cover'] = set_combine(sets.precast.Enmity, {})
 
     -- add mnd for Chivalry
     sets.precast.JA['Chivalry'] = {
-		head="Carmine Mask +1",
-		lear="Static Earring",
-		body="Odyssean Chestplate",
-		hands="Caballarius Gauntlets",
-		rear="Static Earring",
-		lear="Nourishing Earring",
-		lring="Vertigo Ring",
-		rring="Rufescent Ring",
-		waist="Latria Sash",
-		legs="Carmine Cuisses +1",
-		feet="Carmine Greaves"
+		hands="Caballarius Gauntlets +1",
 	}
     
 	sets.precast.JA['Provoke'] = sets.precast.Enmity
@@ -117,27 +108,30 @@ function init_gear_sets()
     -- Fast cast sets for spells
     
     sets.precast.FC = {
-		ammo="Impatiens",
+		ammo="Egoist's Tathlum",
 		head="Carmine Mask +1", --14
+		body="Reverence Surcoat +3", --10
 		neck="Baetyl Pendant",  --4
-		lear="Loquacious Earring", --2
-		body="Odyssean Chestplate",  --10
 		hands="Leyline Gloves",  --8
-		lring="Prolix Ring",  --2
 		rring="Kishar Ring",  --4
+		waist="Creed Baudrier",
 		legs="Odyssean Cuisses", --6
-		feet="Carmine Greaves"  --7
+		back={ name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10',}}, --10
 	}
-	--57
+	--56
 	
-	sets.precast.FC.Cure = set_combine(sets.precast.FC, {rear="Nourishing Earring"}) --3%
+	sets.precast.FC.Cure = set_combine(sets.precast.FC, {
+		body="Jumalik Mail"
+		}) 
 
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
+    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {})
 
        
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
-    sets.precast.WS = {}
+    sets.precast.WS = {
+	back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
+	ammo="Egoist's Tathlum"}
 
     sets.precast.WS.Acc = {}
 
@@ -152,42 +146,39 @@ function init_gear_sets()
 
 	--Modifier 80% DEX. Use Elemental Gorget/Belt as fTP gets transferred across all hits. Use crit rate/damage gear where possible.
     sets.precast.WS['Chant du Cygne'] = set_combine(sets.precast.WS, {
-		head="Sulevia's Mask +1",
-		neck="Lissome Necklace",
-		lear="Mache Earring",
-		rring="Cessance Earring",
+		neck="Fotia Gorget",
 		body="Souveran Cuirass",
-		hands="Sulevia's Gauntlets +1",
-		lring="Ramuh Ring",
-		rring="Petrov Ring",
-		waist="Windbuffet Belt +1",
-		legs="Carmine Cuisses +1",
-		feet="Thereoid Greaves"})
+		hands="Souveran Handschuhs",  --Acc, Att, Enmity 7
+		rring="Eihwaz Ring",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
+		waist="Fotia Belt",
+		legs="Lustratio Subligar",
+		feet="Souveran Schuhs +1"})
  
 	sets.precast.WS['Chant du Cygne'].Acc = set_combine(sets.precast.WS['Chant du Cygne'], {
 	})
 
 	--Sanguine Blade: Modifier 50% MND, 30% STR
     sets.precast.WS['Sanguine Blade'] = {
+		ammo="Amar Cluster",
+		rring="Rufescent Ring",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
+		waist="Dynamic Belt +1"
 	}
     
 	--Damage based on Enmity
-    sets.precast.WS['Atonement'] = {
-	}
+    sets.precast.WS['Atonement'] = sets.precast.Enmity
 	
 	--Modifier 50% MND, 50% STR
     sets.precast.WS['Savage Blade'] = {
-		head="Sulevia's Mask +1",
-		neck="Fotia Gorget",
-		lear="Mache Earring",
-		rring="Cessance Earring",
+		neck="Sanctity Necklace", --Acc, Att, HP +35
 		body="Souveran Cuirass",
-		hands="Sulevia's Gauntlets +1",
-		lring="Rufescent Ring",
-		rring="Shukuyu Ring",
+		hands="Souveran Handschuhs",  --Acc, Att, Enmity 7
+		rring="Eihwaz Ring",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Fotia Belt",
-		legs="Sulevia's Cuisses +1",
-		feet="Sulevia's Leggings +1"	
+		legs="Souveran Diechlings +1"
+
 	}
     
     --------------------------------------
@@ -195,39 +186,36 @@ function init_gear_sets()
     --------------------------------------
 
     sets.midcast.FastRecast = {
-		ammo="Impatiens",
-		head="Carmine Mask +1",
-		neck="Baetyl Pendant",
-		lear="Loquacious Earring",
-		body="Odyssean Chestplate",
-		hands="Leyline Gloves",
-		lring="Prolix Ring",
-		rring="Kishar Ring",
-		waist="Dynamic Belt +1",
-		legs="Odyssean Cuisses", 
-		feet="Carmine Greaves"
-}
+		ammo="Egoist's Tathlum",
+		head="Carmine Mask +1", --14
+		neck="Baetyl Pendant",  --4
+		body="Reverence Surcoat +3", --10
+		hands="Leyline Gloves",  --8
+		rring="Eihwaz Ring",  
+		waist="Creed Baudrier",
+		legs="Odyssean Cuisses", --6
+		back={ name="Rudianos's Mantle", augments={'HP+60','"Fast Cast"+10',}}, --10
+	}
         
     sets.midcast.Enmity = {
-		ammo="Impatiens",
-		head="Souveran Schaller",  --7
-		neck="Unmoving Collar", --9
-		waist="Creed Baudrier", --5
-		lear="Friomisi Earring",  --2
+		ammo="Egoist's Tathlum",  --HP 45
+		head="Souveran Schaller +1",  --9
+		neck="Moonbeam Necklace", --10
+		waist="Creed Baudrier", --5, HP 40
+		rear="Cryptic Earring", --4
 		body="Souveran Cuirass",  --17
-		hands="Macabre Gauntlets +1", --7
-		lring="Petrov Ring",  --4
-		rring="Apeile Ring +1", --5-9
-		back="Rudianos's Mantle", --7
-		legs="Souveran Diechlings", --7
-		feet="Eschite Greaves" --15
+		hands="Souveran Handschuhs", --7
+		rring="Eihwaz Ring", --5, HP 70
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}}, --10
+		legs="Souveran Diechlings +1", --9
+		feet="Souveran Schuhs +1"  --9
 	}
-	--88-92
-	--Brilliance = 14
-	--Total = 102-106
+
+		--85 Total
+		--Brilliance 14
+	
 	
     sets.midcast.Flash = set_combine(sets.midcast.Enmity, {
-	rear="Loquacious Earring"
 	})
     
     sets.midcast.Stun = sets.midcast.Flash
@@ -242,41 +230,38 @@ function init_gear_sets()
     sets.midcast['Chaotic Eye'] = sets.midcast.Enmity
     
     sets.midcast.Cure = {
-		ammo="Impatiens",
-		head="Souveran Schaller", --10% received
-		neck="Incanter's Torque", --10 Healing Magic skill
-		lear="Mendicant's Earring", --5% potency
-		rear="Nourishing Earring", --5-6% potency
-		body="Souveran Cuirass", --10% potency, 10% received
-		hands="Macabre Gauntlets +1", --11% potency
-		lring="Sirona's Ring", --10 Healing Magic skill
-		rring="Apeile Ring +1", --5-9 Enmity
-		waist="Rumination Sash", --MND +4, Spell Interruption -10%
-		legs="Souveran Diechlings", --17% received
-		feet="Eschite Greaves" --Spell Interruption -15%
+		ammo="Impatiens", --Quick magic 2%, Spell Interruption -10%
+		head="Souveran Schaller +1", --15% received, Spell Interruption -20%
+		neck="Moonbeam Necklace", --Spell Interruption 10%, Enmity 10
+		body="Souveran Cuirass", --10% potency, 10% received, Enmity 17
+		hands="Souveran Handschuhs +1", 
+		lring="Moonbeam Ring", --keep for the 100 HP so total HP doesn't go down too much
+		rring="Eihwaz Ring", --5 Enmity, 70 HP
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
+		waist="Rumination Sash", --Spell Interruption -10%
+		legs="Souveran Diechlings +1", --Enmity 9, 23% received
+		feet="Souveran Schuhs +1" -- Enmity 9, 15% received
 	}
-	--Cure potency 31-32 (caps at 50%)
-	--Cure potency received 37% (caps at 30%)
+	--Cure potency 10% (caps at 50%)
+	--Cure potency received 53% (caps at 30%)
+	--Spell Interruption -60%
 
     sets.midcast['Enhancing Magic'] = {
-		head="Carmine Mask +1", --Enhancing Magic 11
-		neck="Incanter's Torque", --Enhancing Magic 10
-		lring="Stikini Ring", --Enhancing Magic 5
+		neck="Moonbeam Necklace", --Spell Interruption 10
+		rring="Eihwaz Ring", 
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Rumination Sash", --Spell Interruption
-		legs="Carmine Cuisses +1", --Enhancing Magic 18
+		feet="Souveran Schuhs +1" --Phalanx +5
 	}
 	--Enhancing Magic 394
 	
 	sets.midcast['Enlight'] = {
 		ammo="Impatiens", --Spell Interruption -10
-		head="Jumalik Helm",
-		neck="Incanter's Torque",
-		lear="Mendicant's Earring",
-		rear="Lempo Earring",
-		hands="Eschite Gauntlets", --Spell Interruption -15
-		lring="Stikini Ring",
+		neck="Moonbeam Necklace",
+		body="Reverence Surcoat +3",
+		rring="Eihwaz Ring",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Rumination Sash",  --Spell Interruption -10
-		feet="Eschite Greaves" --Spell Interruption -15
 	}
 	--Divine Magic Skill 503
 	
@@ -285,17 +270,12 @@ function init_gear_sets()
 	
 	sets.midcast['Holy'] = {
 		ammo="Pemphredo Tathlum",
-		head="Jumalik Helm",
-		neck="Sanctity Necklace",
-		lear="Friomisi Earring",
-		rear="Hecate's Earring",
-		body="Chozoron Coselete",
+		neck="Moonbeam Necklace",
+		body="Reverence Surcoat +3",
 		hands="Leyline Gloves",
-		lring="Kishar Ring",
-		rring="Stikini Ring",
-		waist="Rumination Sash",
-		legs="Odyssean Cuisses", 
-		feet="Eschite Greaves" --Enmity
+		rring="Eihwaz Ring",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
+		waist="Rumination Sash"
 	}
 	
 	sets.midcast['Holy II'] = sets.midcast['Holy'] 
@@ -321,65 +301,64 @@ function init_gear_sets()
     -- Idle sets
     sets.idle = {
 		ammo="Homiliary",
-		head="Sulevia's Mask +1",  --5 DT
-		neck="Bathy Choker +1", 
+		head="Jumalik Helm",  
+		neck="Coatl Gorget +1", 
 		lear="Infused Earring",
 		rear="Hearty Earring",
-		body="Chozoron Coselete",  --8 DT
-		hands="Souveran Handschuhs", --3 PDT, 4 MDT
-		lring="Paguroidea Ring", --DEF 20, Regen
+		body="Jumalik Mail",
+		hands="Souveran Handschuhs +1", --3 PDT, 4 MDT
+		lring="Moonbeam Ring", --4 DT
 		rring="Defending Ring", --10 DT
-		back="Rudianos's Mantle", --4 DT
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Flume Belt",  --4 PDT
 		legs="Carmine Cuisses +1", 
-		feet="Sulevia's Leggings +1" --3 DT
+		feet="Souveran Schuhs +1" --4 DT
 	}
-	--Brilliance + Priwen = 12 DT
-	--30 DT
+	--Brilliance = 3 DT
+	--27 DT
 	--7 PDT
 
 	sets.idle.DT = {
-		sub="Ochain",
-		ammo="Staunch Tathlum",
-		head="Sulevia's Mask +1",  --5 DT
-		neck="Bathy Choker +1", --Regen +3, Eva 5-15
+		ammo="Staunch Tathlum", --2 DT
+		head="Souveran Schaller +1",  --5 PDT
+		neck="Loricate Torque", --5 DT
 		lear="Eabani Earring",
-		rear="Hearty Earring",
-		body="Chozoron Coselete",  --9 DT
-		hands="Souveran Handschuhs", --3 PDT, 4 MDT
-		lring="Paguroidea Ring", --DEF 20, Regen +2
+		rear="Cryptic Earring",
+		body="Reverence Surcoat +3",  --11 DT
+		hands="Souveran Handschuhs +1", --3 PDT, 4 MDT
+		lring="Moonbeam Ring", --4 DT
 		rring="Defending Ring", --10 DT
-		back="Rudianos's Mantle", --4 DT
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Flume Belt",  --4 PDT
-		legs="Souveran Diechlings", --3 DT
-		feet="Sulevia's Leggings +1" --3 DT
+		legs="Souveran Diechlings +1", --3 DT
+		feet="Souveran Schuhs +1" --4 DT
 		}
 
-	--Brilliance + Priwen = 12 DT
-		--Total: 49 DT
+	--Brilliance = 3 DT
+		--Total: 43 DT
+		--+8 DT set bonus = 51 DT
 	
 	sets.idle.MDT = {
 		ammo="Staunch Tathlum",
-		head="Sulevia's Mask +1", --5 DT
-		neck="Twilight Torque", --5 DT
+		neck="Loricate Torque", --5 DT
 		lear="Eabani Earring",
 		rear="Hearty Earring",
-		body="Souveran Cuirass", --9 DT
-		hands="Souveran Handschuhs", --4 MDT, 3 PDT
-		lring="Portus Annulet",
+		body="Reverence Surcoat +3", --11 DT
+		hands="Souveran Handschuhs +1", --4 MDT, 3 PDT
+		lring="Moonbeam Ring",
 		rring="Defending Ring", --10 DT
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10','Spell interruption rate down-10%',}},
 		waist="Flume Belt",
-		legs="Sulevia's Cuisses +1", --6 DT
-		feet="Sulevia's Leggings +1" --3 DT	
+		legs="Souveran Diechlings +1", --3 DT
+		feet="Souveran Schuhs +1" --3 DT	
 	}
 		
-    sets.idle.Town = {
-		main="Brilliance",
-		sub="Aegis",
-		legs="Carmine Cuisses +1",
-		body="Councilor's Garb"
-	}
     
+    sets.idle.Town = set_combine(sets.idle.DT, {
+		body="Reverence Surcoat +3", 
+		legs="Carmine Cuisses +1"
+	})
+	
     sets.idle.Weak = sets.idle
     
     sets.idle.Weak.Reraise = set_combine(sets.idle.Weak, sets.Reraise)
@@ -390,7 +369,8 @@ function init_gear_sets()
     sets.latent_refresh = {
 	waist="Fucho-no-obi"}
 	
-	sets.latent_regen = {lring="Apeile Ring +1"}
+	sets.latent_regen = {
+	}
 
 
     --------------------------------------
@@ -410,22 +390,22 @@ function init_gear_sets()
     -- Basic defense sets.
         
     sets.defense.PDT = {
-		ammo="Staunch Tathlum",
-		head="Sulevia's Mask +1",  --5 DT
-		neck="Twilight Torque", --5 DT
+		ammo="Staunch Tathlum", --2 DT
+		head="Souveran Schaller +1",  --5 DT
+		neck="Loricate Torque", --5 DT
 		lear="Infused Earring",
-		rear="Hearty Earring",
-		body="Souveran Cuirass",  --9 DT
-		hands="Souveran Handschuhs", --3 PDT, 4 MDT
-		lring="Paguroidea Ring", --DEF 20, Regen
+		rear="Eabani Earring",
+		body="Reverence Surcoat +3",  --10 DT
+		hands="Souveran Handschuhs +1", --3 PDT, 4 MDT
+		lring="Moonbeam Ring", --4 DT
 		rring="Defending Ring", --10 DT
-		back="Rudianos's Mantle", --4 DT
-		waist="",
-		legs="Souveran Diechlings", --3 DT
-		feet="Sulevia's Leggings +1" --3 DT
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10',}}, --4 DT
+		waist="Flume Belt", --2 PDT
+		legs="Souveran Diechlings +1", --3 DT
+		feet="Souveran Schuhs +1" --3 DT
 	}
-	--Brilliance + Priwen = 12 DT
-	--51% DT
+	--Brilliance = 3 DT
+	--49% DT
 	--3% PDT
 	--4% MDT
  
@@ -451,85 +431,77 @@ function init_gear_sets()
     
     sets.engaged = {
 		ammo="Amar Cluster",
-		head="Souveran Schaller",  --7%
-		neck="Lissome Necklace",
-		lear="Bladeborn Earring",
-		rear="Steelflash Earring",
+		head="Flamma Zucchetto +2",  --7%
+		neck="Lissome Necklace", 
+		lear="Brutal Earring",
+		rear="Eabani Earring",
 		body="Souveran Cuirass",  --3%
-		hands="Souveran Handschuhs", --4%
-		lring="Petrov Ring",
+		hands="Souveran Handschuhs +1", --4%
+		lring="Moonbeam Ring",
 		rring="Defending Ring",
-		back="Rudianos's Mantle",
-		waist="Dynamic Belt +1",  --6%
-		legs="Souveran Diechlings",  --5%
-		feet="Sulevia's Leggings +1"  --1%
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10',}},
+		waist="Sarissaphoroi Belt",  --3%
+		legs="Sulevia's Cuisses +2",  --2%
+		feet="Souveran Schuhs +1"  --1%
 	}
-	--26% Haste
+	--23% Haste
 
     sets.engaged.Acc = set_combine(sets.engaged, {
 		head="Carmine Mask +1",
 		lear="Mache Earring",
 		rear="Cessance Earring",
-		body="Sulevia's Platemail +1",
-		hands="Sulevia's Gauntlets +1",
-		lring="Portus Annulet",
-		legs="Sulevia's Cuisses +1"
+		legs="Sulevia's Cuisses +2"
 	})
 
     sets.engaged.DW = set_combine(sets.engaged, {
 		ammo="Amar Cluster",
-		head="Souveran Schaller",  --7%
+		head="Souveran Schaller +1",  --7%
 		neck="Lissome Necklace",
 		body="Souveran Cuirass",  --3%
-		hands="Souveran Handschuhs", --4%
-		lring="Petrov Ring",
+		hands="Souveran Handschuhs +1", --4%
 		rring="Defending Ring",
-		back="Rudianos's Mantle",
+		back={ name="Rudianos's Mantle", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Enmity+10',}},
 		waist="Dynamic Belt +1",  --6%
-		legs="Souveran Diechlings",  --5%
-		feet="Sulevia's Leggings +1"  --1%
+		legs="Souveran Diechlings +1"  --5%
 	})
 
     sets.engaged.DW.Acc = set_combine(sets.engaged.DW, {
 		head="Carmine Mask +1",
 		lear="Mache Earring",
 		rear="Cessance Earring",
-		body="Sulevia's Platemail +1",
-		hands="Sulevia's Gauntlets +1",
-		lring="Portus Annulet",
-		legs="Sulevia's Cuisses +1"
+		legs="Sulevia's Cuisses +2"
 	})
 
     sets.engaged.PDT = set_combine(sets.engaged, {
 		ammo="Staunch Tathlum",
-		head="Souveran Schaller",
-		neck="Twilight Torque",
+		head="Souveran Schaller +1",
+		body="Reverence Surcoat +3", 
+		neck="Knight's Bead Necklace +1",
 		lear="Eabani Earring",
-		rear="Hearty Earring",
-		lring="Vertigo Ring",
-		legs="Sulevia's Cuisses +1",
+		rear="Cryptic Earring",
+		legs="Souveran Diechlings +1",
+		waist="Flume Belt"
 	})
 	
-	sets.engaged.MDT = {
-		ammo="Staunch Tathlum",
-		head="Sulevia's Mask +1", --5 DT
-		neck="Twilight Torque", --5 DT
-		lear="Eabani Earring",
-		rear="Hearty Earring",
-		body="Souveran Cuirass", --9 DT
-		hands="Souveran Handschuhs", --4 MDT, 3 PDT
-		lring="Portus Annulet",
-		rring="Defending Ring", --10 DT
-		waist="Flume Belt", --4 PDT
-		legs="Sulevia's Cuisses +1", --6 DT
-		feet="Sulevia's Leggings +1" --3 DT
-	}
+	--Brilliance = 3% DT
+	--DT 38% + 8% set bonus = 46%
+	--PDT 13
+	--MDT 5%
+	--BDT 7%
+	--Reverence Surcoat +3 adds 1% DT
 	
-	--Brilliance 3 DT
-	--Total 44
+	-- With Knight's Beads at 1%:
+	-- DT 30% + 8% set bonus = 38% + Brilliance 3% = 41%
+	-- PDT 13%
+	-- MDT 5%
+	-- BDT 7%
 	
-	--PDT 48
-	--MDT (94)
+	sets.engaged.MDT = set_combine(sets.engaged.PDT, {
+		neck="Loricate Torque", 
+		rear="Hearty Earring"
+	})
+	
+	-- Switch in Loricate Torque to make up for missing DT. Change to Knight's Beads when 4% or higher.
 		
 
     sets.engaged.Acc.PDT = set_combine(sets.engaged.PDT, {
@@ -562,7 +534,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.buff.Doom = {
-		lring="Ephedra Ring",
+		lring="Saida Ring",
 		waist="Gishdubar Sash"
 		}
 	
